@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart - Kifman Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  </head>
+  <body class="bg-black min-h-screen flex flex-col text-white">
+    <header class="w-full flex items-center justify-between px-10 py-6 glass-header sticky top-0 z-40">
+      <div class="flex items-center gap-4">
+        <img src="https://ucarecdn.com/6e2e2e2e-1234-5678-9101-abcdefabcdef/logo.png" alt="Kifman Shop Logo" class="h-10 w-auto" onerror="this.style.display='none'" />
+        <span class="text-3xl font-extrabold tracking-tight uppercase">KIFMAN SHOP</span>
+      </div>
+      <nav class="flex items-center gap-6">
+        <a href="index.html" class="main-btn main-btn-outline-yellow">Home</a>
+        <a href="services.html" class="main-btn main-btn-outline-yellow">Services</a>
+        <a href="cart.html" class="main-btn main-btn-outline-yellow">Cart</a>
+        <a href="track.html" class="main-btn main-btn-outline-yellow">Track Order</a>
+        <a href="admin.html" class="main-btn main-btn-outline-yellow">Admin</a>
+        <a href="about.html" class="main-btn main-btn-outline-yellow">About</a>
+        <!-- Add Cart button for modal -->
+        <button id="cartBtn" class="relative flex items-center gap-2 text-2xl font-semibold text-white hover:text-blue-400 transition">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cartCount" class="bg-blue-500 text-white rounded-full px-2 py-0.5 text-xs font-bold absolute -top-2 -right-3">0</span>
+        </button>
+      </nav>
+    </header>
+    <!-- Cart Modal/Sidebar -->
+    <aside id="cartModal" class="cart-modal closed fixed">
+      <div class="flex items-center justify-between mb-6">
+        <h2>Your Cart</h2>
+        <button id="closeCart" class="close-btn"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="cartItems" class="flex-1 overflow-y-auto" style="margin-bottom:18px;">
+        <p class="text-gray-500 text-center mt-10">Your cart is empty.</p>
+      </div>
+      <div style="margin-top:10px; border-top:1px solid #eee; padding-top:22px;">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-semibold">Total:</span>
+          <span id="cartTotal">RM0.00</span>
+        </div>
+        <button id="payBtn" disabled>
+          <i class="fas fa-credit-card"></i> Proceed to Payment
+        </button>
+      </div>
+    </aside>
+    <div id="cartBackdrop" class="fixed inset-0 z-40 hidden"></div>
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg relative">
+        <button id="closePaymentModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
+        <h2 class="text-2xl font-bold mb-4 text-center">Complete Your Payment</h2>
+        <div class="mb-4">
+          <label class="block font-semibold mb-2">Select Payment Method</label>
+          <div class="flex gap-4 justify-center">
+            <button id="payMethodQR" class="main-btn main-btn-outline-yellow">QR Code</button>
+            <button id="payMethodBank" class="main-btn main-btn-outline-yellow">Bank Transfer</button>
+          </div>
+        </div>
+        <div id="paymentDetails" class="mb-4 hidden">
+          <div id="qrSection" class="hidden">
+            <h4 class="font-semibold text-yellow-700 mb-2 text-center">Scan to Pay</h4>
+            <img src="https://ucarecdn.com/c484f273-e8d3-4810-95ec-60b03d3f6108/QRKifman.png" alt="QR Payment" class="w-48 mx-auto rounded-xl shadow-md" />
+            <p class="text-xs text-gray-500 mt-2 text-center">Scan the QR code to make your payment</p>
+          </div>
+          <div id="bankSection" class="hidden">
+            <h4 class="font-semibold text-yellow-700 mb-2 text-center">Bank Transfer</h4>
+            <div class="text-center text-sm">
+              <p class="font-semibold text-gray-700">Bank Name: <span class="text-yellow-600">Maybank</span></p>
+              <p class="font-semibold text-gray-700">Account Number: <span class="text-yellow-600 tracking-wider">1234 5678 9012</span></p>
+              <p class="font-semibold text-gray-700">Account Holder: <span class="text-yellow-600">Kifman Resources</span></p>
+            </div>
+            <p class="text-xs text-gray-500 mt-4 italic text-center">*Please upload your receipt below after transferring</p>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block font-semibold mb-2">Upload Payment Receipt <span class="text-red-500">*</span></label>
+          <input id="receiptUpload" type="hidden" role="uploadcare-uploader" data-crop="free" data-clearable="true" aria-label="Upload payment receipt" />
+          <div id="receiptPreview" class="mt-2"></div>
+        </div>
+        <button id="submitWhatsAppBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 flex items-center justify-center gap-2 disabled:opacity-50" disabled>
+          <i class="fab fa-whatsapp mr-2"></i> Submit via WhatsApp
+        </button>
+      </div>
+    </div>
+    <script src="js/script.js"></script>
+  </body>
+</html> 

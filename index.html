@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kifman Shop - Digital Services</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  </head>
+  <body class="bg-black min-h-screen flex flex-col text-white">
+    <header class="w-full flex items-center justify-between px-10 py-6 glass-header sticky top-0 z-40">
+      <div class="flex items-center gap-4">
+        <img src="https://ucarecdn.com/6e2e2e2e-1234-5678-9101-abcdefabcdef/logo.png" alt="Kifman Shop Logo" class="h-10 w-auto" onerror="this.style.display='none'" />
+        <span class="text-3xl font-extrabold tracking-tight uppercase">KIFMAN SHOP</span>
+      </div>
+      <nav class="flex items-center gap-6">
+        <a href="index.html" class="main-btn main-btn-outline-yellow">Home</a>
+        <a href="services.html" class="main-btn main-btn-outline-yellow">Services</a>
+        <a href="cart.html" class="main-btn main-btn-outline-yellow">Cart</a>
+        <a href="track.html" class="main-btn main-btn-outline-yellow">Track Order</a>
+        <a href="admin.html" class="main-btn main-btn-outline-yellow">Admin</a>
+        <a href="about.html" class="main-btn main-btn-outline-yellow">About</a>
+        <!-- Add Track Order button for modal -->
+        <button id="trackOrderBtn" class="main-btn main-btn-outline-yellow text-base font-semibold px-6 py-2 border-2 border-white/20 rounded-full hover:bg-white/10 transition">Track Order</button>
+        <!-- Add Cart button for modal -->
+        <button id="cartBtn" class="relative flex items-center gap-2 text-2xl font-semibold text-white hover:text-blue-400 transition">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cartCount" class="bg-blue-500 text-white rounded-full px-2 py-0.5 text-xs font-bold absolute -top-2 -right-3">0</span>
+        </button>
+      </nav>
+    </header>
+    <!-- Hero Section -->
+    <section class="w-full flex flex-col items-center justify-center text-center py-32 bg-gradient-to-b from-black via-gray-900 to-gray-950 relative overflow-hidden">
+      <div id="star-bg"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-transparent to-black/80 pointer-events-none"></div>
+      <h1 class="relative z-10 text-6xl md:text-7xl font-extrabold tracking-tight mb-8 hero-glow">Digital Services, <span class="text-blue-400">Instantly</span></h1>
+      <p class="relative z-10 text-2xl md:text-3xl text-gray-300 max-w-3xl mx-auto mb-12">Top up games, pay bills, and more — all in one place. Fast, secure, and trusted by thousands. Experience the future of digital convenience with Kifman Shop.</p>
+      <div class="relative z-10 flex flex-col md:flex-row gap-6 justify-center">
+        <a href="services.html" class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-12 py-5 rounded-full text-2xl shadow-xl cta-glow">Get Started</a>
+        <a href="track.html" class="bg-white/10 hover:bg-white/20 text-blue-200 font-semibold px-12 py-5 rounded-full text-2xl border border-blue-400/30 shadow-xl transition">Track Order</a>
+      </div>
+    </section>
+    <!-- Feature Highlights Section -->
+    <section class="w-full max-w-5xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-4 gap-6 px-4">
+      <div class="bg-white/5 border border-blue-400/10 rounded-2xl p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-md">
+        <i class="fas fa-bolt text-4xl text-blue-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">Instant Top-up</h3>
+        <p class="text-gray-300 text-sm">Get your credits or bills paid in seconds, anytime.</p>
+      </div>
+      <div class="bg-white/5 border border-blue-400/10 rounded-2xl p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-md">
+        <i class="fas fa-lock text-4xl text-blue-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">Secure Payments</h3>
+        <p class="text-gray-300 text-sm">Your transactions are encrypted and protected.</p>
+      </div>
+      <div class="bg-white/5 border border-blue-400/10 rounded-2xl p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-md">
+        <i class="fas fa-users text-4xl text-blue-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">Trusted by Many</h3>
+        <p class="text-gray-300 text-sm">Join a growing community of satisfied customers.</p>
+      </div>
+      <div class="bg-white/5 border border-blue-400/10 rounded-2xl p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-md">
+        <i class="fas fa-headset text-4xl text-blue-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">24/7 Support</h3>
+        <p class="text-gray-300 text-sm">We're here to help, day or night, whenever you need.</p>
+      </div>
+    </section>
+    <!-- How It Works Section -->
+    <section class="w-full max-w-4xl mx-auto mt-20 mb-32 px-4">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12 hero-glow">How It Works</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="flex flex-col items-center text-center">
+          <div class="bg-blue-500/20 border border-blue-400/20 rounded-full w-24 h-24 flex items-center justify-center mb-4 shadow-lg">
+            <i class="fas fa-list-ul text-4xl text-blue-400"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">1. Select Service</h3>
+          <p class="text-gray-300 text-sm">Choose your top-up or bill payment from our wide range of digital services.</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="bg-blue-500/20 border border-blue-400/20 rounded-full w-24 h-24 flex items-center justify-center mb-4 shadow-lg">
+            <i class="fas fa-upload text-4xl text-blue-400"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">2. Pay & Upload Receipt</h3>
+          <p class="text-gray-300 text-sm">Complete your payment securely and upload your receipt for instant processing.</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="bg-blue-500/20 border border-blue-400/20 rounded-full w-24 h-24 flex items-center justify-center mb-4 shadow-lg">
+            <i class="fas fa-rocket text-4xl text-blue-400"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">3. Get Top-up Instantly</h3>
+          <p class="text-gray-300 text-sm">Sit back and relax—your credits or bill payment will be processed right away.</p>
+        </div>
+      </div>
+    </section>
+    <script src="js/script.js"></script>
+    <!-- Cart Modal/Sidebar -->
+    <aside id="cartModal" class="cart-modal closed fixed">
+      <div class="flex items-center justify-between mb-6">
+        <h2>Your Cart</h2>
+        <button id="closeCart" class="close-btn"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="cartItems" class="flex-1 overflow-y-auto" style="margin-bottom:18px;">
+        <p class="text-gray-500 text-center mt-10">Your cart is empty.</p>
+      </div>
+      <div style="margin-top:10px; border-top:1px solid #eee; padding-top:22px;">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-semibold">Total:</span>
+          <span id="cartTotal">RM0.00</span>
+        </div>
+        <button id="payBtn" disabled>
+          <i class="fas fa-credit-card"></i> Proceed to Payment
+        </button>
+      </div>
+    </aside>
+    <div id="cartBackdrop" class="fixed inset-0 z-40 hidden"></div>
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg relative">
+        <button id="closePaymentModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
+        <h2 class="text-2xl font-bold mb-4 text-center">Complete Your Payment</h2>
+        <div class="mb-4">
+          <label class="block font-semibold mb-2">Select Payment Method</label>
+          <div class="flex gap-4 justify-center">
+            <button id="payMethodQR" class="main-btn main-btn-outline-yellow">QR Code</button>
+            <button id="payMethodBank" class="main-btn main-btn-outline-yellow">Bank Transfer</button>
+          </div>
+        </div>
+        <div id="paymentDetails" class="mb-4 hidden">
+          <div id="qrSection" class="hidden">
+            <h4 class="font-semibold text-yellow-700 mb-2 text-center">Scan to Pay</h4>
+            <img src="https://ucarecdn.com/c484f273-e8d3-4810-95ec-60b03d3f6108/QRKifman.png" alt="QR Payment" class="w-48 mx-auto rounded-xl shadow-md" />
+            <p class="text-xs text-gray-500 mt-2 text-center">Scan the QR code to make your payment</p>
+          </div>
+          <div id="bankSection" class="hidden">
+            <h4 class="font-semibold text-yellow-700 mb-2 text-center">Bank Transfer</h4>
+            <div class="text-center text-sm">
+              <p class="font-semibold text-gray-700">Bank Name: <span class="text-yellow-600">Maybank</span></p>
+              <p class="font-semibold text-gray-700">Account Number: <span class="text-yellow-600 tracking-wider">1234 5678 9012</span></p>
+              <p class="font-semibold text-gray-700">Account Holder: <span class="text-yellow-600">Kifman Resources</span></p>
+            </div>
+            <p class="text-xs text-gray-500 mt-4 italic text-center">*Please upload your receipt below after transferring</p>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block font-semibold mb-2">Upload Payment Receipt <span class="text-red-500">*</span></label>
+          <input id="receiptUpload" type="hidden" role="uploadcare-uploader" data-crop="free" data-clearable="true" aria-label="Upload payment receipt" />
+          <div id="receiptPreview" class="mt-2"></div>
+        </div>
+        <button id="submitWhatsAppBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 flex items-center justify-center gap-2 disabled:opacity-50" disabled>
+          <i class="fab fa-whatsapp mr-2"></i> Submit via WhatsApp
+        </button>
+      </div>
+    </div>
+    <!-- Order Tracking Modal -->
+    <div id="trackOrderModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative">
+        <button id="closeTrackOrderModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
+        <h2 class="text-xl font-bold mb-4 text-center">Track Your Order</h2>
+        <form id="trackOrderForm" class="space-y-4">
+          <div>
+            <label class="block text-gray-700 font-medium mb-1" for="trackRef">Reference Number</label>
+            <input id="trackRef" type="text" class="w-full border rounded-lg px-3 py-2" placeholder="e.g. KIF-20240601-1234" required />
+          </div>
+          <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 rounded-lg">Check Status</button>
+        </form>
+        <div id="trackOrderResult" class="mt-6"></div>
+      </div>
+    </div>
+    <!-- Hamburger Menu Drawer (Left) -->
+    <div id="adminMenuDrawer" class="fixed inset-0 z-50 flex pointer-events-none">
+      <aside class="w-64 max-w-full h-full bg-white shadow-2xl p-0 flex flex-col transform -translate-x-full transition-transform duration-300 pointer-events-auto" id="adminMenuDrawerContent">
+        <div class="flex items-center justify-between px-6 py-4 border-b">
+          <h2 class="text-xl font-bold">Menu</h2>
+          <button id="closeAdminMenuDrawer" class="text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
+        </div>
+        <nav class="flex-1 flex flex-col gap-2 p-6">
+          <button id="openAdminPanelBtn" class="main-btn main-btn-outline-yellow w-full text-left">Admin Panel</button>
+        </nav>
+      </aside>
+      <div class="flex-1 bg-black bg-opacity-40 transition-opacity duration-300 opacity-0 pointer-events-none" id="adminMenuDrawerBackdrop"></div>
+    </div>
+    <!-- Admin Panel Full Page -->
+    <div id="adminPanelPage" class="fixed inset-0 z-50 bg-white flex-col hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b shadow">
+        <h2 class="text-xl font-bold">Admin Panel - Orders</h2>
+        <button id="backToShopBtn" class="main-btn main-btn-outline-yellow">Back to Shop</button>
+      </div>
+      <div id="adminOrdersList" class="overflow-x-auto p-6 flex-1"></div>
+    </div>
+    <!-- Admin Panel Controls -->
+    <template id="adminPanelControls">
+      <div class="flex flex-col md:flex-row md:items-center gap-2 mb-4">
+        <input id="adminSearchInput" type="text" placeholder="Search by Reference" class="border rounded px-3 py-2 w-full md:w-64" />
+        <select id="adminStatusFilter" class="border rounded px-3 py-2 w-full md:w-40">
+          <option value="">All Statuses</option>
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+          <option value="Archived">Archived</option>
+        </select>
+        <select id="adminSort" class="border rounded px-3 py-2 w-full md:w-40">
+          <option value="date_desc">Newest First</option>
+          <option value="date_asc">Oldest First</option>
+          <option value="status">Status</option>
+          <option value="total_desc">Total High-Low</option>
+          <option value="total_asc">Total Low-High</option>
+        </select>
+      </div>
+    </template>
+    <!-- Order Details Modal -->
+    <div id="orderDetailsModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg relative">
+        <button id="closeOrderDetailsModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
+        <h2 class="text-2xl font-bold mb-4 text-center">Order Details</h2>
+        <div id="orderDetailsContent"></div>
+      </div>
+    </div>
+  </body>
+</html> 

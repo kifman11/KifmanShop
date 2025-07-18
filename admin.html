@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel - Kifman Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  </head>
+  <body class="bg-black min-h-screen flex flex-col text-white">
+    <header class="w-full flex items-center justify-between px-10 py-6 glass-header sticky top-0 z-40">
+      <div class="flex items-center gap-4">
+        <img src="https://ucarecdn.com/6e2e2e2e-1234-5678-9101-abcdefabcdef/logo.png" alt="Kifman Shop Logo" class="h-10 w-auto" onerror="this.style.display='none'" />
+        <span class="text-3xl font-extrabold tracking-tight uppercase">KIFMAN SHOP</span>
+      </div>
+      <nav class="flex items-center gap-6">
+        <a href="index.html" class="main-btn main-btn-outline-yellow">Home</a>
+        <a href="services.html" class="main-btn main-btn-outline-yellow">Services</a>
+        <a href="cart.html" class="main-btn main-btn-outline-yellow">Cart</a>
+        <a href="track.html" class="main-btn main-btn-outline-yellow">Track Order</a>
+        <a href="admin.html" class="main-btn main-btn-outline-yellow">Admin</a>
+        <a href="about.html" class="main-btn main-btn-outline-yellow">About</a>
+      </nav>
+    </header>
+    <!-- Admin Panel Full Page -->
+    <div id="adminPanelPage" class="fixed inset-0 z-50 bg-white flex-col">
+      <div class="flex items-center justify-between px-6 py-4 border-b shadow">
+        <h2 class="text-xl font-bold">Admin Panel - Orders</h2>
+        <button id="backToShopBtn" class="main-btn main-btn-outline-yellow">Back to Shop</button>
+      </div>
+      <div id="adminOrdersList" class="overflow-x-auto p-6 flex-1"></div>
+    </div>
+    <!-- Admin Panel Controls -->
+    <template id="adminPanelControls">
+      <div class="flex flex-col md:flex-row md:items-center gap-2 mb-4">
+        <input id="adminSearchInput" type="text" placeholder="Search by Reference" class="border rounded px-3 py-2 w-full md:w-64" />
+        <select id="adminStatusFilter" class="border rounded px-3 py-2 w-full md:w-40">
+          <option value="">All Statuses</option>
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+          <option value="Archived">Archived</option>
+        </select>
+        <select id="adminSort" class="border rounded px-3 py-2 w-full md:w-40">
+          <option value="date_desc">Newest First</option>
+          <option value="date_asc">Oldest First</option>
+          <option value="status">Status</option>
+          <option value="total_desc">Total High-Low</option>
+          <option value="total_asc">Total Low-High</option>
+        </select>
+      </div>
+    </template>
+    <!-- Order Details Modal -->
+    <div id="orderDetailsModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg relative">
+        <button id="closeOrderDetailsModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
+        <h2 class="text-2xl font-bold mb-4 text-center">Order Details</h2>
+        <div id="orderDetailsContent"></div>
+      </div>
+    </div>
+    <script src="js/script.js"></script>
+    <script>
+      // Admin Panel Logic
+      document.addEventListener('DOMContentLoaded', function() {
+        const adminPanelPage = document.getElementById('adminPanelPage');
+        const backToShopBtn = document.getElementById('backToShopBtn');
+        const adminOrdersList = document.getElementById('adminOrdersList');
+        const adminPanelControls = document.getElementById('adminPanelControls');
+        const orderDetailsModal = document.getElementById('orderDetailsModal');
+        const closeOrderDetailsModal = document.getElementById('closeOrderDetailsModal');
+        const orderDetailsContent = document.getElementById('orderDetailsContent');
+
+        // Function to fetch and display orders
+        async function fetchOrders() {
+          try {
+            const response = await fetch('https://api.kifmanshop.com/orders'); // Replace with your actual API endpoint
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const orders = await response.json();
+            displayOrders(orders);
+          } catch (error) {
+            console.error('Error fetching orders:', error);
+            adminOrdersList.innerHTML = '<p>Failed to fetch orders. Please try again later.</p>';
+          }
+        }
+
+        // Function to display orders in the list
+        function displayOrders(orders) {
+          adminOrdersList.innerHTML = ''; // Clear previous orders
+          if (orders.length === 0) {
+            adminOrdersList.innerHTML = '<p>No orders found.</p>';
+            return;
+          }
+
+          // Render controls from template
+          const controlsTemplate = document.getElementById('adminPanelControls');
+          if (controlsTemplate) {
+            const controls = controlsTemplate.content.cloneNode(true);
+            adminOrdersList.appendChild(controls);
+          }
+
+          // Now get the controls from the DOM
+          const adminSearchInput = adminOrdersList.querySelector('#adminSearchInput');
+          const adminStatusFilter = adminOrdersList.querySelector('#adminStatusFilter');
+          const adminSort = adminOrdersList.querySelector('#adminSort');
+
+          if (adminSearchInput) {
+            adminSearchInput.addEventListener('input', () => {
+              const searchTerm = adminSearchInput.value.toLowerCase();
+              const filteredOrders = orders.filter(order =>
+                order.reference.toLowerCase().includes(searchTerm) ||
+                order.status.toLowerCase().includes(searchTerm) ||
+                order.customer.name.toLowerCase().includes(searchTerm) ||
+                order.customer.email.toLowerCase().includes(searchTerm) ||
+                order.customer.phone.toLowerCase().includes(searchTerm)
+              );
+              displayOrders(filteredOrders);
+            });
+          }
+
+          if (adminStatusFilter) {
+            adminStatusFilter.addEventListener('change', () => {
+              const selectedStatus = adminStatusFilter.value;
+              const filteredOrders = orders.filter(order =>
+                selectedStatus === '' || order.status === selectedStatus
+              );
+              displayOrders(filteredOrders);
+            });
+          }
+
+          if (adminSort) {
+            adminSort.addEventListener('change', () => {
+              const sortBy = adminSort.value;
+              const sortedOrders = [...orders];
+              sortedOrders.sort((a, b) => {
+                if (sortBy === 'date_desc') return new Date(b.date) - new Date(a.date);
+                if (sortBy === 'date_asc') return new Date(a.date) - new Date(b.date);
+                if (sortBy === 'status') return a.status.localeCompare(b.status);
+                if (sortBy === 'total_desc') return b.total - a.total;
+                if (sortBy === 'total_asc') return a.total - b.total;
+                return 0;
+              });
+              displayOrders(sortedOrders);
+            });
+          }
+
+          orders.forEach(order => {
+            const orderCard = document.createElement('div');
+            orderCard.classList.add('bg-gray-800', 'p-4', 'rounded-lg', 'mb-4', 'flex', 'justify-between', 'items-center');
+            orderCard.innerHTML = `
+              <div>
+                <p class="text-lg font-semibold">Reference: ${order.reference}</p>
+                <p>Status: <span class="font-bold ${order.status === 'Completed' ? 'text-green-400' : order.status === 'In Progress' ? 'text-yellow-400' : order.status === 'Pending' ? 'text-red-400' : 'text-gray-400'}">${order.status}</span></p>
+                <p>Total: $${order.total.toFixed(2)}</p>
+                <p>Date: ${new Date(order.date).toLocaleDateString()}</p>
+              </div>
+              <button class="main-btn main-btn-outline-yellow text-sm" onclick="showOrderDetails(${JSON.stringify(order)})">View Details</button>
+            `;
+            adminOrdersList.appendChild(orderCard);
+          });
+        }
+
+        // Function to show order details in the modal
+        function showOrderDetails(order) {
+          orderDetailsContent.innerHTML = `
+            <h3 class="text-xl font-bold mb-2">Order Reference: ${order.reference}</h3>
+            <p><strong>Status:</strong> ${order.status}</p>
+            <p><strong>Total:</strong> $${order.total.toFixed(2)}</p>
+            <p><strong>Date:</strong> ${new Date(order.date).toLocaleDateString()}</p>
+            <h4 class="text-lg font-semibold mt-4 mb-2">Items:</h4>
+            <ul class="list-disc list-inside text-gray-300">
+              ${order.items.map(item => `
+                <li>${item.name} (Qty: ${item.quantity}, Price: $${item.price.toFixed(2)})</li>
+              `).join('')}
+            </ul>
+            <p><strong>Customer:</strong> ${order.customer.name}</p>
+            <p><strong>Email:</strong> ${order.customer.email}</p>
+            <p><strong>Phone:</strong> ${order.customer.phone}</p>
+            <p><strong>Address:</strong> ${order.customer.address}</p>
+            <p><strong>Payment Method:</strong> ${order.paymentMethod}</p>
+            <p><strong>Payment Status:</strong> ${order.paymentStatus}</p>
+            <p><strong>Notes:</strong> ${order.notes || 'N/A'}</p>
+          `;
+          orderDetailsModal.classList.remove('hidden');
+        }
+
+        backToShopBtn.addEventListener('click', () => {
+          window.location.href = 'index.html';
+        });
+
+        // Initial fetch on page load
+        fetchOrders();
+      });
+    </script>
+  </body>
+</html> 

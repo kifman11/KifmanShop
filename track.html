@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Order - Kifman Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  </head>
+  <body class="bg-black min-h-screen flex flex-col text-white">
+    <header class="w-full flex items-center justify-between px-10 py-6 glass-header sticky top-0 z-40">
+      <div class="flex items-center gap-4">
+        <img src="https://ucarecdn.com/6e2e2e2e-1234-5678-9101-abcdefabcdef/logo.png" alt="Kifman Shop Logo" class="h-10 w-auto" onerror="this.style.display='none'" />
+        <span class="text-3xl font-extrabold tracking-tight uppercase">KIFMAN SHOP</span>
+      </div>
+      <nav class="flex items-center gap-6">
+        <a href="index.html" class="main-btn main-btn-outline-yellow">Home</a>
+        <a href="services.html" class="main-btn main-btn-outline-yellow">Services</a>
+        <a href="cart.html" class="main-btn main-btn-outline-yellow">Cart</a>
+        <a href="track.html" class="main-btn main-btn-outline-yellow">Track Order</a>
+        <a href="admin.html" class="main-btn main-btn-outline-yellow">Admin</a>
+        <a href="about.html" class="main-btn main-btn-outline-yellow">About</a>
+      </nav>
+    </header>
+    <!-- Order Tracking Modal -->
+    <div id="trackOrderModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative">
+        <button id="closeTrackOrderModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
+        <h2 class="text-xl font-bold mb-4 text-center">Track Your Order</h2>
+        <form id="trackOrderForm" class="space-y-4">
+          <div>
+            <label class="block text-gray-700 font-medium mb-1" for="trackRef">Reference Number</label>
+            <input id="trackRef" type="text" class="w-full border rounded-lg px-3 py-2" placeholder="e.g. KIF-20240601-1234" required />
+          </div>
+          <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 rounded-lg">Check Status</button>
+        </form>
+        <div id="trackOrderResult" class="mt-6"></div>
+      </div>
+    </div>
+    <script src="js/script.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const trackOrderModal = document.getElementById('trackOrderModal');
+        const closeTrackOrderModal = document.getElementById('closeTrackOrderModal');
+        const trackOrderForm = document.getElementById('trackOrderForm');
+        const trackRefInput = document.getElementById('trackRef');
+        const trackOrderResult = document.getElementById('trackOrderResult');
+
+        function showModal() {
+          trackOrderModal.style.display = 'flex';
+        }
+
+        function hideModal() {
+          trackOrderModal.style.display = 'none';
+        }
+
+        function clearResult() {
+          trackOrderResult.innerHTML = '';
+        }
+
+        function displayError(message) {
+          trackOrderResult.innerHTML = `<div class="text-red-500 text-center">${message}</div>`;
+        }
+
+        function displaySuccess(message) {
+          trackOrderResult.innerHTML = `<div class="text-green-500 text-center">${message}</div>`;
+        }
+
+        function displayOrderDetails(order) {
+          trackOrderResult.innerHTML = `
+            <h3 class="text-xl font-bold mb-2">Order Details</h3>
+            <p><strong>Reference Number:</strong> ${order.reference_number}</p>
+            <p><strong>Status:</strong> ${order.status}</p>
+            <p><strong>Date:</strong> ${order.date}</p>
+            <p><strong>Total:</strong> $${order.total}</p>
+            <p><strong>Items:</strong></p>
+            <ul>
+              ${order.items.map(item => `<li>${item.name} - $${item.price} x ${item.quantity}</li>`).join('')}
+            </ul>
+            <p><strong>Shipping Address:</strong></p>
+            <p>${order.shipping_address}</p>
+            <p><strong>Payment Method:</strong> ${order.payment_method}</p>
+          `;
+        }
+
+        closeTrackOrderModal.addEventListener('click', hideModal);
+
+        trackOrderForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const referenceNumber = trackRefInput.value.trim();
+
+          if (!referenceNumber) {
+            displayError('Please enter a reference number.');
+            return;
+          }
+
+          try {
+            const response = await fetch(`/api/orders/track/${referenceNumber}`);
+            if (response.ok) {
+              const order = await response.json();
+              displayOrderDetails(order);
+            } else {
+              const errorData = await response.json();
+              displayError(errorData.message || 'Failed to fetch order details.');
+            }
+          } catch (error) {
+            displayError('An error occurred while fetching order details.');
+            console.error(error);
+          }
+        });
+
+        // Show modal when page loads
+        showModal();
+      });
+    </script>
+  </body>
+</html> 
