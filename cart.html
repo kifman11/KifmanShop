@@ -3,32 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cart - Kifman Shop</title>
+    <title>KIFMAN x NISH – Reliable Services For Your Needs</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
   </head>
   <body class="bg-black min-h-screen flex flex-col text-white">
-    <header class="w-full flex items-center justify-between px-10 py-6 glass-header sticky top-0 z-40">
-      <div class="flex items-center gap-4">
-        <img src="https://ucarecdn.com/6e2e2e2e-1234-5678-9101-abcdefabcdef/logo.png" alt="Kifman Shop Logo" class="h-10 w-auto" onerror="this.style.display='none'" />
-        <span class="text-3xl font-extrabold tracking-tight uppercase">KIFMAN SHOP</span>
+    <!-- Page Transition Overlay -->
+    <div id="pageTransition" class="page-transition-overlay"></div>
+    <!-- Logo at top left -->
+    <div class="absolute top-6 left-6 z-50">
+      <img src="images/Logo.png" alt="KIFMAN x NISH Logo" class="h-12 w-auto" />
+    </div>
+    <!-- Main navigation bar (centered) -->
+    <header class="flex justify-center items-center w-full py-6 bg-transparent sticky top-0 z-40">
+      <div class="nav-card flex items-center justify-center w-full max-w-2xl px-6 py-3 rounded-2xl shadow-xl">
+        <nav class="flex items-center gap-4">
+          <a href="about.html" class="nav-link">About</a>
+          <a href="services.html" class="nav-link">Our Services</a>
+          <a href="faq.html" class="nav-link">FAQ</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
       </div>
-      <nav class="flex items-center gap-6">
-        <a href="index.html" class="main-btn main-btn-outline-yellow">Home</a>
-        <a href="services.html" class="main-btn main-btn-outline-yellow">Services</a>
-        <a href="cart.html" class="main-btn main-btn-outline-yellow">Cart</a>
-        <a href="track.html" class="main-btn main-btn-outline-yellow">Track Order</a>
-        <a href="admin.html" class="main-btn main-btn-outline-yellow">Admin</a>
-        <a href="about.html" class="main-btn main-btn-outline-yellow">About</a>
-        <!-- Add Cart button for modal -->
-        <button id="cartBtn" class="relative flex items-center gap-2 text-2xl font-semibold text-white hover:text-blue-400 transition">
-          <i class="fas fa-shopping-cart"></i>
-          <span id="cartCount" class="bg-blue-500 text-white rounded-full px-2 py-0.5 text-xs font-bold absolute -top-2 -right-3">0</span>
-        </button>
-      </nav>
+      <!-- Secondary nav: Buy Now button at top right -->
+      <div class="fixed top-6 right-6 z-50">
+        <div class="nav-card flex items-center px-4 py-2 rounded-2xl shadow-xl">
+          <a href="cart.html" class="nav-link flex items-center gap-2" style="font-weight:700;">
+            <i class="fas fa-shopping-cart"></i> Buy Now
+          </a>
+        </div>
+      </div>
     </header>
+    <div id="dropdownNav" class="absolute left-0 top-full w-full bg-white/95 border-b border-blue-400/10 shadow-xl z-50 hidden flex-col md:hidden animate-fade-in rounded-2xl mt-2" style="box-shadow: 0 8px 32px 0 #1e293b22; border: 1.5px solid #e0e7ef; margin: 0.5rem; overflow: hidden;">
+      <a href="services.html" class="block px-8 py-4 text-lg nav-link">Services</a>
+      <a href="cart.html" class="block px-8 py-4 text-lg nav-link">Cart</a>
+      <a href="admin.html" class="block px-8 py-4 text-lg nav-link">Admin</a>
+      <a href="about.html" class="block px-8 py-4 text-lg nav-link">About</a>
+    </div>
+    <script>
+      // Dropdown menu logic
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const dropdownNav = document.getElementById('dropdownNav');
+      if (hamburgerBtn && dropdownNav) {
+        hamburgerBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          dropdownNav.classList.toggle('hidden');
+        });
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!dropdownNav.classList.contains('hidden')) {
+            if (!dropdownNav.contains(e.target) && e.target !== hamburgerBtn) {
+              dropdownNav.classList.add('hidden');
+            }
+          }
+        });
+        // Close dropdown when a link is clicked
+        dropdownNav.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            dropdownNav.classList.add('hidden');
+          });
+        });
+      }
+    </script>
     <!-- Cart Modal/Sidebar -->
     <aside id="cartModal" class="cart-modal closed fixed">
       <div class="flex items-center justify-between mb-6">
@@ -87,6 +124,60 @@
         </button>
       </div>
     </div>
+    <script>
+      // Page Transition System
+      (function() {
+        const pageTransition = document.getElementById('pageTransition');
+        
+        if (!pageTransition) return;
+        
+        // Show transition overlay
+        function showPageTransition() {
+          pageTransition.classList.add('active');
+        }
+        
+        // Hide transition overlay
+        function hidePageTransition() {
+          pageTransition.classList.remove('active');
+        }
+        
+        // Handle page transitions for external links
+        function setupPageTransitions() {
+          const externalLinks = document.querySelectorAll('a[href*=".html"]:not([href^="#"])');
+          
+          externalLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+              const href = this.getAttribute('href');
+              
+              // Skip if it's an anchor link or external URL
+              if (href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+                return;
+              }
+              
+              // Show transition overlay
+              showPageTransition();
+              
+              // Navigate after a short delay to show the transition
+              setTimeout(() => {
+                window.location.href = href;
+              }, 300);
+            });
+          });
+        }
+        
+        // Hide transition on page load
+        window.addEventListener('load', () => {
+          hidePageTransition();
+        });
+        
+        // Initialize page transitions
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', setupPageTransitions);
+        } else {
+          setupPageTransitions();
+        }
+      })();
+    </script>
     <script src="js/script.js"></script>
   </body>
 </html> 

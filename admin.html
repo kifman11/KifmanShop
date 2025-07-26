@@ -3,35 +3,170 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Panel - Kifman Shop</title>
+    <title>Admin Panel - KIFMAN x NISH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
   </head>
-  <body class="bg-black min-h-screen flex flex-col text-white">
-    <header class="w-full flex items-center justify-between px-10 py-6 glass-header sticky top-0 z-40">
-      <div class="flex items-center gap-4">
-        <img src="https://ucarecdn.com/6e2e2e2e-1234-5678-9101-abcdefabcdef/logo.png" alt="Kifman Shop Logo" class="h-10 w-auto" onerror="this.style.display='none'" />
-        <span class="text-3xl font-extrabold tracking-tight uppercase">KIFMAN SHOP</span>
+  <body>
+    <!-- Page Transition Overlay -->
+    <div id="pageTransition" class="page-transition-overlay"></div>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+      <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Minimalist Breadcrumb Navigation -->
+    <div class="breadcrumb" id="breadcrumb">
+      <div class="breadcrumb-logo">
+        <a href="index.html">
+          <img src="images/Logo.png" alt="KIFMAN x NISH Logo" />
+        </a>
       </div>
-      <nav class="flex items-center gap-6">
-        <a href="index.html" class="main-btn main-btn-outline-yellow">Home</a>
-        <a href="services.html" class="main-btn main-btn-outline-yellow">Services</a>
-        <a href="cart.html" class="main-btn main-btn-outline-yellow">Cart</a>
-        <a href="track.html" class="main-btn main-btn-outline-yellow">Track Order</a>
-        <a href="admin.html" class="main-btn main-btn-outline-yellow">Admin</a>
-        <a href="about.html" class="main-btn main-btn-outline-yellow">About</a>
-      </nav>
-    </header>
+      <div class="breadcrumb-links">
+        <a href="index.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </div>
+    </div>
+
+    <!-- Cart Navigation Bar -->
+    <nav class="cart-nav" id="cartNav">
+      <div class="cart-nav-container">
+        <button class="cart-btn" id="cartBtn" title="Shopping Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Navigation -->
+    <nav class="floating-nav" id="mainNav">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="index.html">
+            <img src="images/Logo.png" alt="KIFMAN x NISH Logo" />
+          </a>
+        </div>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">About</a>
+          <a href="services.html" class="nav-link">Services</a>
+          <a href="index.html#faq" class="nav-link">FAQ</a>
+          <a href="index.html#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-background">
+        <div class="hero-pattern"></div>
+      </div>
+      
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-user-shield"></i>
+          <span>Admin Panel Access</span>
+        </div>
+        
+        <h1 class="hero-headline">
+          Admin Panel
+          <span class="hero-brand">KIFMAN x NISH</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+          Manage orders, track customer requests, and oversee all operations. 
+          Secure access to the backend management system.
+        </p>
+        
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="accessAdminBtn">
+            <i class="fas fa-lock"></i>
+            <span>Access Admin Panel</span>
+          </button>
+          <a href="index.html" class="btn btn-secondary">
+            <i class="fas fa-home"></i>
+            <span>Back to Home</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin Panel Section -->
+    <section class="about-section" id="adminSection">
+      <div class="container">
+        <div class="section-header fade-in">
+          <h2 class="section-heading">Order Management</h2>
+          <p class="section-subtitle">
+            View, manage, and update customer orders from a centralized dashboard.
+          </p>
+        </div>
+        
+        <div class="contact-content">
+          <div class="contact-info slide-in-left">
+            <div class="contact-methods">
+              <div class="contact-method scale-in">
+                <div class="contact-icon">
+                  <i class="fas fa-list"></i>
+                </div>
+                <div class="contact-details">
+                  <div class="contact-label">Order Overview</div>
+                  <div class="contact-sub">View all customer orders</div>
+                </div>
+              </div>
+              
+              <div class="contact-method scale-in">
+                <div class="contact-icon">
+                  <i class="fas fa-edit"></i>
+                </div>
+                <div class="contact-details">
+                  <div class="contact-label">Status Updates</div>
+                  <div class="contact-sub">Update order status</div>
+                </div>
+              </div>
+              
+              <div class="contact-method scale-in">
+                <div class="contact-icon">
+                  <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="contact-details">
+                  <div class="contact-label">Analytics</div>
+                  <div class="contact-sub">Track performance metrics</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-form slide-in-right">
+            <div class="contact-form-inner">
+              <h3 class="text-xl font-bold mb-4">Admin Access</h3>
+              <p class="text-gray-600 mb-4">Click the button below to access the full admin panel with order management capabilities.</p>
+              <button class="btn btn-primary w-full" id="openAdminPanelBtn">
+                <i class="fas fa-external-link-alt"></i>
+                <span>Open Admin Panel</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Admin Panel Full Page -->
-    <div id="adminPanelPage" class="fixed inset-0 z-50 bg-white flex-col">
+    <div id="adminPanelPage" class="fixed inset-0 z-50 bg-white flex-col hidden">
       <div class="flex items-center justify-between px-6 py-4 border-b shadow">
         <h2 class="text-xl font-bold">Admin Panel - Orders</h2>
-        <button id="backToShopBtn" class="main-btn main-btn-outline-yellow">Back to Shop</button>
+        <button id="backToShopBtn" class="btn btn-secondary">Back to Shop</button>
       </div>
       <div id="adminOrdersList" class="overflow-x-auto p-6 flex-1"></div>
     </div>
+
     <!-- Admin Panel Controls -->
     <template id="adminPanelControls">
       <div class="flex flex-col md:flex-row md:items-center gap-2 mb-4">
@@ -52,17 +187,88 @@
         </select>
       </div>
     </template>
+
     <!-- Order Details Modal -->
     <div id="orderDetailsModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
       <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg relative">
-        <button id="closeOrderDetailsModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
+        <button id="closeOrderDetailsModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl">
+          <i class="fas fa-times"></i>
+        </button>
         <h2 class="text-2xl font-bold mb-4 text-center">Order Details</h2>
         <div id="orderDetailsContent"></div>
       </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <img src="images/Logo.png" alt="KIFMAN x NISH Logo" />
+            </div>
+            <p class="footer-description">
+              Simple digital services made personal. We're here to help with mobile top-ups, 
+              bill payments, and game credits.
+            </p>
+            <!-- Social icons removed -->
+          </div>
+          
+          <div class="footer-links-group">
+            <h3 class="footer-heading">Services</h3>
+            <ul class="footer-links">
+              <li><a href="services.html">Mobile Top-ups</a></li>
+              <li><a href="services.html">Bill Payments</a></li>
+              <li><a href="services.html">Game Credits</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-links-group">
+            <h3 class="footer-heading">Support</h3>
+            <ul class="footer-links">
+              <li><a href="index.html#faq">FAQ</a></li>
+              <li><a href="index.html#contact">Contact Us</a></li>
+              <li><a href="track.html">Track Order</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-contact">
+            <h3 class="footer-heading">Get In Touch</h3>
+                                        <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+60 19-476 1092 (Kifman)</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>muhammadakifaiman@gmail.com</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+60 19-448 7256 (Nish)</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>danishmirza05@gmail.com</span>
+              </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <div class="footer-bottom-content">
+            <div class="footer-copyright">
+              © 2025 KIFMAN x NISH. All rights reserved.
+            </div>
+            <div class="footer-legal">
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <script src="js/script.js"></script>
     <script>
-      // Admin Panel Logic
       document.addEventListener('DOMContentLoaded', function() {
         const adminPanelPage = document.getElementById('adminPanelPage');
         const backToShopBtn = document.getElementById('backToShopBtn');
@@ -71,11 +277,22 @@
         const orderDetailsModal = document.getElementById('orderDetailsModal');
         const closeOrderDetailsModal = document.getElementById('closeOrderDetailsModal');
         const orderDetailsContent = document.getElementById('orderDetailsContent');
+        const accessAdminBtn = document.getElementById('accessAdminBtn');
+        const openAdminPanelBtn = document.getElementById('openAdminPanelBtn');
+
+        function showAdminPanel() {
+          adminPanelPage.classList.remove('hidden');
+          fetchOrders();
+        }
+
+        function hideAdminPanel() {
+          adminPanelPage.classList.add('hidden');
+        }
 
         // Function to fetch and display orders
         async function fetchOrders() {
           try {
-            const response = await fetch('https://api.kifmanshop.com/orders'); // Replace with your actual API endpoint
+            const response = await fetch('https://sheetdb.io/api/v1/enqljk0i6rbgo');
             if (!response.ok) {
               throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -111,11 +328,8 @@
             adminSearchInput.addEventListener('input', () => {
               const searchTerm = adminSearchInput.value.toLowerCase();
               const filteredOrders = orders.filter(order =>
-                order.reference.toLowerCase().includes(searchTerm) ||
-                order.status.toLowerCase().includes(searchTerm) ||
-                order.customer.name.toLowerCase().includes(searchTerm) ||
-                order.customer.email.toLowerCase().includes(searchTerm) ||
-                order.customer.phone.toLowerCase().includes(searchTerm)
+                (order["Reference Number"] || '').toLowerCase().includes(searchTerm) ||
+                (order["Status"] || '').toLowerCase().includes(searchTerm)
               );
               displayOrders(filteredOrders);
             });
@@ -125,7 +339,7 @@
             adminStatusFilter.addEventListener('change', () => {
               const selectedStatus = adminStatusFilter.value;
               const filteredOrders = orders.filter(order =>
-                selectedStatus === '' || order.status === selectedStatus
+                selectedStatus === '' || order["Status"] === selectedStatus
               );
               displayOrders(filteredOrders);
             });
@@ -136,11 +350,11 @@
               const sortBy = adminSort.value;
               const sortedOrders = [...orders];
               sortedOrders.sort((a, b) => {
-                if (sortBy === 'date_desc') return new Date(b.date) - new Date(a.date);
-                if (sortBy === 'date_asc') return new Date(a.date) - new Date(b.date);
-                if (sortBy === 'status') return a.status.localeCompare(b.status);
-                if (sortBy === 'total_desc') return b.total - a.total;
-                if (sortBy === 'total_asc') return a.total - b.total;
+                if (sortBy === 'date_desc') return new Date(b["Created On"]) - new Date(a["Created On"]);
+                if (sortBy === 'date_asc') return new Date(a["Created On"]) - new Date(b["Created On"]);
+                if (sortBy === 'status') return (a["Status"]||'').localeCompare(b["Status"]||'');
+                if (sortBy === 'total_desc') return Number(b["Total"]) - Number(a["Total"]);
+                if (sortBy === 'total_asc') return Number(a["Total"]) - Number(b["Total"]);
                 return 0;
               });
               displayOrders(sortedOrders);
@@ -148,16 +362,24 @@
           }
 
           orders.forEach(order => {
+            let items = [];
+            try {
+              items = JSON.parse(order["Items"]);
+            } catch {}
             const orderCard = document.createElement('div');
             orderCard.classList.add('bg-gray-800', 'p-4', 'rounded-lg', 'mb-4', 'flex', 'justify-between', 'items-center');
             orderCard.innerHTML = `
               <div>
-                <p class="text-lg font-semibold">Reference: ${order.reference}</p>
-                <p>Status: <span class="font-bold ${order.status === 'Completed' ? 'text-green-400' : order.status === 'In Progress' ? 'text-yellow-400' : order.status === 'Pending' ? 'text-red-400' : 'text-gray-400'}">${order.status}</span></p>
-                <p>Total: $${order.total.toFixed(2)}</p>
-                <p>Date: ${new Date(order.date).toLocaleDateString()}</p>
+                <p class="text-lg font-semibold">Reference: ${order["Reference Number"]}</p>
+                <p>Status: <span class="font-bold ${order["Status"] === 'Completed' ? 'text-green-400' : order["Status"] === 'In Progress' ? 'text-yellow-400' : order["Status"] === 'Pending' ? 'text-red-400' : 'text-gray-400'}">${order["Status"]}</span></p>
+                <p>Total: $${Number(order["Total"]).toFixed(2)}</p>
+                <p>Date: ${new Date(order["Created On"]).toLocaleDateString()}</p>
+                <p>Items:</p>
+                <ul class="list-disc list-inside text-gray-300">
+                  ${items.map(item => `<li>${item.type} ${item.telco ? '- ' + item.telco : ''} ${item.name ? '- ' + item.name : ''} (Qty: ${item.quantity || 1}, Price: $${item.amount || item.price})</li>`).join('')}
+                </ul>
               </div>
-              <button class="main-btn main-btn-outline-yellow text-sm" onclick="showOrderDetails(${JSON.stringify(order)})">View Details</button>
+              <button class="btn btn-primary text-sm" onclick='showOrderDetails(${JSON.stringify(order)})'>View Details</button>
             `;
             adminOrdersList.appendChild(orderCard);
           });
@@ -166,15 +388,15 @@
         // Function to show order details in the modal
         function showOrderDetails(order) {
           orderDetailsContent.innerHTML = `
-            <h3 class="text-xl font-bold mb-2">Order Reference: ${order.reference}</h3>
-            <p><strong>Status:</strong> ${order.status}</p>
-            <p><strong>Total:</strong> $${order.total.toFixed(2)}</p>
-            <p><strong>Date:</strong> ${new Date(order.date).toLocaleDateString()}</p>
+            <h3 class="text-xl font-bold mb-2">Order Reference: ${order["Reference Number"]}</h3>
+            <p><strong>Status:</strong> ${order["Status"]}</p>
+            <p><strong>Total:</strong> $${Number(order["Total"]).toFixed(2)}</p>
+            <p><strong>Date:</strong> ${new Date(order["Created On"]).toLocaleDateString()}</p>
             <h4 class="text-lg font-semibold mt-4 mb-2">Items:</h4>
             <ul class="list-disc list-inside text-gray-300">
-              ${order.items.map(item => `
-                <li>${item.name} (Qty: ${item.quantity}, Price: $${item.price.toFixed(2)})</li>
-              `).join('')}
+              ${order["Items"] ? JSON.parse(order["Items"]).map(item => `
+                <li>${item.type} ${item.telco ? '- ' + item.telco : ''} ${item.name ? '- ' + item.name : ''} (Qty: ${item.quantity || 1}, Price: $${item.amount || item.price})</li>
+              `).join('') : 'No items found.'}
             </ul>
             <p><strong>Customer:</strong> ${order.customer.name}</p>
             <p><strong>Email:</strong> ${order.customer.email}</p>
@@ -187,13 +409,75 @@
           orderDetailsModal.classList.remove('hidden');
         }
 
-        backToShopBtn.addEventListener('click', () => {
-          window.location.href = 'index.html';
+        if (backToShopBtn) backToShopBtn.addEventListener('click', hideAdminPanel);
+        if (accessAdminBtn) accessAdminBtn.addEventListener('click', showAdminPanel);
+        if (openAdminPanelBtn) openAdminPanelBtn.addEventListener('click', showAdminPanel);
+        if (closeOrderDetailsModal) closeOrderDetailsModal.addEventListener('click', () => {
+          orderDetailsModal.classList.add('hidden');
         });
 
-        // Initial fetch on page load
-        fetchOrders();
+        // Close modal when clicking outside
+        orderDetailsModal.addEventListener('click', (e) => {
+          if (e.target === orderDetailsModal) {
+            orderDetailsModal.classList.add('hidden');
+          }
+        });
       });
+    </script>
+    
+    <script>
+      // Page Transition System
+      (function() {
+        const pageTransition = document.getElementById('pageTransition');
+        
+        if (!pageTransition) return;
+        
+        // Show transition overlay
+        function showPageTransition() {
+          pageTransition.classList.add('active');
+        }
+        
+        // Hide transition overlay
+        function hidePageTransition() {
+          pageTransition.classList.remove('active');
+        }
+        
+        // Handle page transitions for external links
+        function setupPageTransitions() {
+          const externalLinks = document.querySelectorAll('a[href*=".html"]:not([href^="#"])');
+          
+          externalLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+              const href = this.getAttribute('href');
+              
+              // Skip if it's an anchor link or external URL
+              if (href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+                return;
+              }
+              
+              // Show transition overlay
+              showPageTransition();
+              
+              // Navigate after a short delay to show the transition
+              setTimeout(() => {
+                window.location.href = href;
+              }, 300);
+            });
+          });
+        }
+        
+        // Hide transition on page load
+        window.addEventListener('load', () => {
+          hidePageTransition();
+        });
+        
+        // Initialize page transitions
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', setupPageTransitions);
+        } else {
+          setupPageTransitions();
+        }
+      })();
     </script>
   </body>
 </html> 

@@ -3,217 +3,877 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kifman Shop - Digital Services</title>
+    <title>KIFMAN x NISH - Simple Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
   </head>
-  <body class="bg-black min-h-screen flex flex-col text-white">
-    <header class="w-full flex items-center justify-between px-10 py-6 glass-header sticky top-0 z-40">
-      <div class="flex items-center gap-4">
-        <img src="https://ucarecdn.com/6e2e2e2e-1234-5678-9101-abcdefabcdef/logo.png" alt="Kifman Shop Logo" class="h-10 w-auto" onerror="this.style.display='none'" />
-        <span class="text-3xl font-extrabold tracking-tight uppercase">KIFMAN SHOP</span>
+  <body>
+    <!-- Page Transition Overlay -->
+    <div id="pageTransition" class="page-transition-overlay"></div>
+    
+    <div id="main-content">
+      <!-- Minimalist Breadcrumb Navigation -->
+      <div class="breadcrumb" id="breadcrumb">
+        <div class="breadcrumb-logo">
+          <a href="#hero">
+            <img src="images/Logo.png" alt="KIFMAN x NISH Logo" />
+          </a>
+        </div>
+        <div class="breadcrumb-links">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#services" class="nav-link">Services</a>
+          <a href="#contact" class="nav-link">Contact</a>
+          <a href="login.html" class="nav-link login-btn">
+            <i class="fas fa-user"></i>
+            <span>Login</span>
+          </a>
+        </div>
       </div>
-      <nav class="flex items-center gap-6">
-        <a href="index.html" class="main-btn main-btn-outline-yellow">Home</a>
-        <a href="services.html" class="main-btn main-btn-outline-yellow">Services</a>
-        <a href="cart.html" class="main-btn main-btn-outline-yellow">Cart</a>
-        <a href="track.html" class="main-btn main-btn-outline-yellow">Track Order</a>
-        <a href="admin.html" class="main-btn main-btn-outline-yellow">Admin</a>
-        <a href="about.html" class="main-btn main-btn-outline-yellow">About</a>
-        <!-- Add Track Order button for modal -->
-        <button id="trackOrderBtn" class="main-btn main-btn-outline-yellow text-base font-semibold px-6 py-2 border-2 border-white/20 rounded-full hover:bg-white/10 transition">Track Order</button>
-        <!-- Add Cart button for modal -->
-        <button id="cartBtn" class="relative flex items-center gap-2 text-2xl font-semibold text-white hover:text-blue-400 transition">
-          <i class="fas fa-shopping-cart"></i>
-          <span id="cartCount" class="bg-blue-500 text-white rounded-full px-2 py-0.5 text-xs font-bold absolute -top-2 -right-3">0</span>
-        </button>
+
+
+
+      <!-- Navigation -->
+      <nav class="floating-nav" id="mainNav">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="#hero">
+              <img src="images/Logo.png" alt="KIFMAN x NISH Logo" />
+            </a>
+          </div>
+          <div class="nav-links">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="#why" class="nav-link">Why Us</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="#contact" class="nav-link">Contact</a>
+            <a href="login.html" class="nav-link login-btn">
+              <i class="fas fa-user"></i>
+              <span>Login</span>
+            </a>
+          </div>
+          <div class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
       </nav>
-    </header>
-    <!-- Hero Section -->
-    <section class="w-full flex flex-col items-center justify-center text-center py-32 bg-gradient-to-b from-black via-gray-900 to-gray-950 relative overflow-hidden">
-      <div id="star-bg"></div>
-      <div class="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-transparent to-black/80 pointer-events-none"></div>
-      <h1 class="relative z-10 text-6xl md:text-7xl font-extrabold tracking-tight mb-8 hero-glow">Digital Services, <span class="text-blue-400">Instantly</span></h1>
-      <p class="relative z-10 text-2xl md:text-3xl text-gray-300 max-w-3xl mx-auto mb-12">Top up games, pay bills, and more — all in one place. Fast, secure, and trusted by thousands. Experience the future of digital convenience with Kifman Shop.</p>
-      <div class="relative z-10 flex flex-col md:flex-row gap-6 justify-center">
-        <a href="services.html" class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-12 py-5 rounded-full text-2xl shadow-xl cta-glow">Get Started</a>
-        <a href="track.html" class="bg-white/10 hover:bg-white/20 text-blue-200 font-semibold px-12 py-5 rounded-full text-2xl border border-blue-400/30 shadow-xl transition">Track Order</a>
-      </div>
-    </section>
-    <!-- Feature Highlights Section -->
-    <section class="w-full max-w-5xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-4 gap-6 px-4">
-      <div class="bg-white/5 border border-blue-400/10 rounded-2xl p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-md">
-        <i class="fas fa-bolt text-4xl text-blue-400 mb-4"></i>
-        <h3 class="font-bold text-lg mb-2">Instant Top-up</h3>
-        <p class="text-gray-300 text-sm">Get your credits or bills paid in seconds, anytime.</p>
-      </div>
-      <div class="bg-white/5 border border-blue-400/10 rounded-2xl p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-md">
-        <i class="fas fa-lock text-4xl text-blue-400 mb-4"></i>
-        <h3 class="font-bold text-lg mb-2">Secure Payments</h3>
-        <p class="text-gray-300 text-sm">Your transactions are encrypted and protected.</p>
-      </div>
-      <div class="bg-white/5 border border-blue-400/10 rounded-2xl p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-md">
-        <i class="fas fa-users text-4xl text-blue-400 mb-4"></i>
-        <h3 class="font-bold text-lg mb-2">Trusted by Many</h3>
-        <p class="text-gray-300 text-sm">Join a growing community of satisfied customers.</p>
-      </div>
-      <div class="bg-white/5 border border-blue-400/10 rounded-2xl p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-md">
-        <i class="fas fa-headset text-4xl text-blue-400 mb-4"></i>
-        <h3 class="font-bold text-lg mb-2">24/7 Support</h3>
-        <p class="text-gray-300 text-sm">We're here to help, day or night, whenever you need.</p>
-      </div>
-    </section>
-    <!-- How It Works Section -->
-    <section class="w-full max-w-4xl mx-auto mt-20 mb-32 px-4">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12 hero-glow">How It Works</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div class="flex flex-col items-center text-center">
-          <div class="bg-blue-500/20 border border-blue-400/20 rounded-full w-24 h-24 flex items-center justify-center mb-4 shadow-lg">
-            <i class="fas fa-list-ul text-4xl text-blue-400"></i>
+
+      <!-- Hero Section -->
+      <section class="hero-section" id="hero">
+        <div class="hero-background">
+          <div class="hero-pattern"></div>
+        </div>
+        
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="fas fa-heart"></i>
+            <span>Made with care by a small team</span>
           </div>
-          <h3 class="font-bold text-lg mb-2">1. Select Service</h3>
-          <p class="text-gray-300 text-sm">Choose your top-up or bill payment from our wide range of digital services.</p>
-        </div>
-        <div class="flex flex-col items-center text-center">
-          <div class="bg-blue-500/20 border border-blue-400/20 rounded-full w-24 h-24 flex items-center justify-center mb-4 shadow-lg">
-            <i class="fas fa-upload text-4xl text-blue-400"></i>
-          </div>
-          <h3 class="font-bold text-lg mb-2">2. Pay & Upload Receipt</h3>
-          <p class="text-gray-300 text-sm">Complete your payment securely and upload your receipt for instant processing.</p>
-        </div>
-        <div class="flex flex-col items-center text-center">
-          <div class="bg-blue-500/20 border border-blue-400/20 rounded-full w-24 h-24 flex items-center justify-center mb-4 shadow-lg">
-            <i class="fas fa-rocket text-4xl text-blue-400"></i>
-          </div>
-          <h3 class="font-bold text-lg mb-2">3. Get Top-up Instantly</h3>
-          <p class="text-gray-300 text-sm">Sit back and relax—your credits or bill payment will be processed right away.</p>
-        </div>
-      </div>
-    </section>
-    <script src="js/script.js"></script>
-    <!-- Cart Modal/Sidebar -->
-    <aside id="cartModal" class="cart-modal closed fixed">
-      <div class="flex items-center justify-between mb-6">
-        <h2>Your Cart</h2>
-        <button id="closeCart" class="close-btn"><i class="fas fa-times"></i></button>
-      </div>
-      <div id="cartItems" class="flex-1 overflow-y-auto" style="margin-bottom:18px;">
-        <p class="text-gray-500 text-center mt-10">Your cart is empty.</p>
-      </div>
-      <div style="margin-top:10px; border-top:1px solid #eee; padding-top:22px;">
-        <div class="flex items-center justify-between mb-4">
-          <span class="font-semibold">Total:</span>
-          <span id="cartTotal">RM0.00</span>
-        </div>
-        <button id="payBtn" disabled>
-          <i class="fas fa-credit-card"></i> Proceed to Payment
-        </button>
-      </div>
-    </aside>
-    <div id="cartBackdrop" class="fixed inset-0 z-40 hidden"></div>
-    <!-- Payment Modal -->
-    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg relative">
-        <button id="closePaymentModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
-        <h2 class="text-2xl font-bold mb-4 text-center">Complete Your Payment</h2>
-        <div class="mb-4">
-          <label class="block font-semibold mb-2">Select Payment Method</label>
-          <div class="flex gap-4 justify-center">
-            <button id="payMethodQR" class="main-btn main-btn-outline-yellow">QR Code</button>
-            <button id="payMethodBank" class="main-btn main-btn-outline-yellow">Bank Transfer</button>
+          
+          <h1 class="hero-headline">
+            Simple Digital Services
+            <span class="hero-brand">KIFMAN x NISH</span>
+          </h1>
+          
+          <p class="hero-subtitle">
+            We make mobile top-ups, bill payments, and game credits easy and affordable. 
+            No complicated processes, just simple, honest service from real people.
+          </p>
+          
+          <div class="hero-actions">
+            <a href="services.html" class="btn btn-primary">
+              <i class="fas fa-shopping-cart"></i>
+              <span>Browse Services</span>
+            </a>
+            <a href="track.html" class="btn btn-secondary">
+              <i class="fas fa-search"></i>
+              <span>Track Order</span>
+            </a>
           </div>
         </div>
-        <div id="paymentDetails" class="mb-4 hidden">
-          <div id="qrSection" class="hidden">
-            <h4 class="font-semibold text-yellow-700 mb-2 text-center">Scan to Pay</h4>
-            <img src="https://ucarecdn.com/c484f273-e8d3-4810-95ec-60b03d3f6108/QRKifman.png" alt="QR Payment" class="w-48 mx-auto rounded-xl shadow-md" />
-            <p class="text-xs text-gray-500 mt-2 text-center">Scan the QR code to make your payment</p>
-          </div>
-          <div id="bankSection" class="hidden">
-            <h4 class="font-semibold text-yellow-700 mb-2 text-center">Bank Transfer</h4>
-            <div class="text-center text-sm">
-              <p class="font-semibold text-gray-700">Bank Name: <span class="text-yellow-600">Maybank</span></p>
-              <p class="font-semibold text-gray-700">Account Number: <span class="text-yellow-600 tracking-wider">1234 5678 9012</span></p>
-              <p class="font-semibold text-gray-700">Account Holder: <span class="text-yellow-600">Kifman Resources</span></p>
+      </section>
+
+      <!-- About Section -->
+      <section class="about-section" id="about">
+        <div class="container">
+          <div class="about-content">
+            <div class="about-text fade-in">
+              <h2 class="section-heading">Our Story</h2>
+              <p class="section-subtitle">
+                We're two people who wanted to make digital services more personal and accessible.
+              </p>
+              <p class="about-description">
+                Like many of you, we've been frustrated by complicated websites and impersonal service. 
+                That's why we built KIFMAN x NISH - to offer simple, honest digital services with a human touch. 
+                We're just getting started, and we'd love for you to join us on this journey!
+              </p>
             </div>
-            <p class="text-xs text-gray-500 mt-4 italic text-center">*Please upload your receipt below after transferring</p>
+            <div class="about-visual slide-in-right">
+              <div class="features-grid">
+                <div class="feature-item scale-in">
+                  <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h3>Personal Service</h3>
+                    <p>Direct communication with real people, not bots</p>
+                  </div>
+                </div>
+                
+                <div class="feature-item scale-in">
+                  <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h3>Safe & Secure</h3>
+                    <p>Your security and privacy are our top priorities</p>
+                  </div>
+                </div>
+                
+                <div class="feature-item scale-in">
+                  <div class="feature-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h3>Honest Pricing</h3>
+                    <p>Transparent costs with no hidden fees</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="mb-4">
-          <label class="block font-semibold mb-2">Upload Payment Receipt <span class="text-red-500">*</span></label>
-          <input id="receiptUpload" type="hidden" role="uploadcare-uploader" data-crop="free" data-clearable="true" aria-label="Upload payment receipt" />
-          <div id="receiptPreview" class="mt-2"></div>
+      </section>
+
+      <!-- Why Choose Us Section -->
+      <section class="why-section" id="why">
+        <div class="container">
+          <div class="section-header fade-in">
+            <h2 class="section-heading">Why Choose Us?</h2>
+            <p class="section-subtitle">
+              We're different because we care about the little things that matter to you.
+            </p>
+          </div>
+          
+          <div class="why-grid">
+            <div class="why-card fade-in">
+              <div class="why-icon">
+                <i class="fas fa-user-friends"></i>
+              </div>
+              <h3>Real People, Real Help</h3>
+              <p>No bots, no call centers. When you need help, you'll talk directly to us - the same people who built this service.</p>
+            </div>
+            
+            <div class="why-card fade-in">
+              <div class="why-icon">
+                <i class="fas fa-hand-holding-heart"></i>
+              </div>
+              <h3>Honest & Transparent</h3>
+              <p>No hidden fees, no surprises. We're upfront about our prices and what we can (and can't) do for you.</p>
+            </div>
+            
+            <div class="why-card fade-in">
+              <div class="why-icon">
+                <i class="fas fa-leaf"></i>
+              </div>
+              <h3>Growing Together</h3>
+              <p>We're new, just like many of our customers. Your feedback helps us improve and serve you better every day.</p>
+            </div>
+          </div>
         </div>
-        <button id="submitWhatsAppBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 flex items-center justify-center gap-2 disabled:opacity-50" disabled>
-          <i class="fab fa-whatsapp mr-2"></i> Submit via WhatsApp
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="how-section" id="how">
+        <div class="container">
+          <div class="section-header fade-in">
+            <h2 class="section-heading">How It Works</h2>
+            <p class="section-subtitle">
+              Simple steps to get what you need, when you need it.
+            </p>
+          </div>
+          
+          <div class="how-steps">
+            <div class="how-step slide-in-left">
+              <div class="step-number">1</div>
+              <h3>Choose Your Service</h3>
+              <p>Pick from mobile top-ups, bill payments, or game credits. We keep it simple.</p>
+            </div>
+            
+            <div class="how-step fade-in">
+              <div class="step-number">2</div>
+              <h3>Enter Your Details</h3>
+              <p>Tell us what you need and how much. We'll guide you through each step.</p>
+            </div>
+            
+            <div class="how-step slide-in-right">
+              <div class="step-number">3</div>
+              <h3>Pay & Get Confirmation</h3>
+              <p>Pay securely, and we'll confirm your order personally. No waiting, no guessing.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section class="services-section" id="services">
+        <div class="container">
+          <div class="section-header fade-in">
+            <h2 class="section-heading">Our Services</h2>
+            <p class="section-subtitle">
+              Everything you need for your digital life, made simple.
+            </p>
+          </div>
+          
+          <div class="services-grid">
+            <div class="service-card slide-in-left">
+              <div class="service-icon">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <div class="service-content">
+                <h3>Mobile Top-ups</h3>
+                <p>Prepaid and postpaid recharges with instant processing. Keep your phone connected without the hassle.</p>
+                <div class="service-features">
+                  <span class="feature-tag">Instant</span>
+                  <span class="feature-tag">All Networks</span>
+                  <span class="feature-tag">24/7</span>
+                </div>
+                <div class="service-cta">
+                  <a href="services.html" class="service-link">
+                    <span>Recharge Now</span>
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="service-card fade-in">
+              <div class="service-icon">
+                <i class="fas fa-bolt"></i>
+              </div>
+              <div class="service-content">
+                <h3>Bill Payments</h3>
+                <p>Pay your utility bills, internet, and other services quickly and securely. Never miss a payment again.</p>
+                <div class="service-features">
+                  <span class="feature-tag">Secure</span>
+                  <span class="feature-tag">Fast</span>
+                  <span class="feature-tag">Reliable</span>
+                </div>
+                <div class="service-cta">
+                  <a href="services.html" class="service-link">
+                    <span>Pay Bills</span>
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="service-card slide-in-right">
+              <div class="service-icon">
+                <i class="fas fa-gamepad"></i>
+              </div>
+              <div class="service-content">
+                <h3>Game Credits</h3>
+                <p>Get gaming currency and credits for your favorite games. Instant delivery, competitive prices.</p>
+                <div class="service-features">
+                  <span class="feature-tag">Instant</span>
+                  <span class="feature-tag">All Games</span>
+                  <span class="feature-tag">Best Price</span>
+                </div>
+                <div class="service-cta">
+                  <a href="services.html" class="service-link">
+                    <span>Buy Credits</span>
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="faq-section" id="faq">
+        <div class="container">
+          <div class="section-header fade-in">
+            <h2 class="section-heading">Frequently Asked Questions</h2>
+            <p class="section-subtitle">
+              Everything you need to know about our services, security, and support.
+            </p>
+          </div>
+          
+          <div class="faq-grid">
+            <div class="faq-item fade-in">
+              <button class="faq-question">
+                <i class="fas fa-clock"></i>
+                <span>How fast do you process orders?</span>
+              </button>
+              <div class="faq-answer">
+                <p>Most orders are processed within minutes of payment confirmation. We'll keep you updated every step of the way.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item fade-in">
+              <button class="faq-question">
+                <i class="fas fa-shield-alt"></i>
+                <span>Is it safe to use your service?</span>
+              </button>
+              <div class="faq-answer">
+                <p>Absolutely! We use secure payment methods and never store your sensitive information. Your security is our priority.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item fade-in">
+              <button class="faq-question">
+                <i class="fas fa-headset"></i>
+                <span>How can I get help if I need it?</span>
+              </button>
+              <div class="faq-answer">
+                <p>We're here to help! Contact us via WhatsApp, email, or phone. We're a small team, so you'll always get personal attention.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item fade-in">
+              <button class="faq-question">
+                <i class="fas fa-credit-card"></i>
+                <span>What payment methods do you accept?</span>
+              </button>
+              <div class="faq-answer">
+                <p>We currently accept online bank transfers and QR payments only. All payments are processed securely and we'll provide you with the payment details after you place your order.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item fade-in">
+              <button class="faq-question">
+                <i class="fas fa-globe"></i>
+                <span>Do you serve customers outside Malaysia?</span>
+              </button>
+              <div class="faq-answer">
+                <p>Currently, we focus on serving customers within Malaysia. We're working on expanding our services to other regions soon.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item fade-in">
+              <button class="faq-question">
+                <i class="fas fa-undo"></i>
+                <span>What is your refund policy?</span>
+              </button>
+              <div class="faq-answer">
+                <p>We offer full refunds for any failed transactions or service issues. Contact us within 24 hours of your order for assistance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact-section" id="contact">
+        <div class="container">
+          <div class="section-header fade-in">
+            <h2 class="section-heading">Get In Touch</h2>
+            <p class="section-subtitle">
+              Have questions? Want to say hello? We'd love to hear from you!
+            </p>
+          </div>
+          
+          <div class="contact-content">
+            <div class="contact-info slide-in-left">
+              <div class="contact-methods">
+                <div class="contact-method scale-in">
+                  <div class="contact-icon">
+                    <i class="fas fa-phone-alt"></i>
+                  </div>
+                  <div class="contact-details">
+                    <div class="contact-label">+60 19-476 1092</div>
+                    <div class="contact-sub">Kifman - Co-founder & Operations</div>
+                    <div class="contact-email">muhammadakifaiman@gmail.com</div>
+                    <div class="contact-actions">
+                      <a href="https://wa.me/60194761092?text=Hi%20Kifman!%20I'm%20interested%20in%20your%20digital%20services.%20Can%20you%20help%20me?" target="_blank" class="contact-action-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                      </a>
+                      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=muhammadakifaiman@gmail.com&su=Inquiry%20about%20Digital%20Services&body=Hi%20Kifman,%0A%0AI'm%20interested%20in%20your%20digital%20services.%20Can%20you%20help%20me%20with%20more%20information?%0A%0ABest%20regards," target="_blank" class="contact-action-btn">
+                        <i class="fas fa-envelope"></i>
+                        <span>Gmail</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="contact-method scale-in">
+                  <div class="contact-icon">
+                    <i class="fas fa-phone-alt"></i>
+                  </div>
+                  <div class="contact-details">
+                    <div class="contact-label">+60 19-448 7256</div>
+                    <div class="contact-sub">Nish - Co-founder & Business Development</div>
+                    <div class="contact-email">danishmirza0051@gmail.com</div>
+                    <div class="contact-actions">
+                      <a href="https://wa.me/60194487256?text=Hi%20Nish!%20I'm%20interested%20in%20your%20digital%20services.%20Can%20you%20help%20me?" target="_blank" class="contact-action-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                      </a>
+                      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=danishmirza0051@gmail.com&su=Inquiry%20about%20Digital%20Services&body=Hi%20Nish,%0A%0AI'm%20interested%20in%20your%20digital%20services.%20Can%20you%20help%20me%20with%20more%20information?%0A%0ABest%20regards," target="_blank" class="contact-action-btn">
+                        <i class="fas fa-envelope"></i>
+                        <span>Gmail</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="contact-method scale-in">
+                  <div class="contact-icon">
+                    <i class="fas fa-clock"></i>
+                  </div>
+                  <div class="contact-details">
+                    <div class="contact-label">Business Hours</div>
+                    <div class="contact-sub">Mon-Sat: 9AM-9PM (Malaysia Time)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="contact-form slide-in-right">
+              <form class="contact-form-inner" id="contactForm">
+                <div class="form-group">
+                  <input type="text" id="name" required placeholder=" " />
+                  <label for="name">Your Name</label>
+                </div>
+                <div class="form-group">
+                  <input type="email" id="email" required placeholder=" " />
+                  <label for="email">Your Email</label>
+                </div>
+                <div class="form-group">
+                  <textarea id="message" rows="4" required placeholder=" "></textarea>
+                  <label for="message">Your Message</label>
+                </div>
+                <div id="contactMessage" class="message" style="display: none;"></div>
+                <button type="submit" class="btn btn-primary" id="contactSubmit">
+                  <i class="fas fa-paper-plane"></i>
+                  <span>Send Message</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section">
+        <div class="container">
+          <div class="cta-content fade-in">
+            <h2 class="cta-heading">Ready to Get Started?</h2>
+            <p class="cta-subtitle">
+              Join us in making digital services simple, personal, and reliable.
+            </p>
+            <div class="cta-buttons">
+              <a href="#services" class="btn btn-primary">
+                <i class="fas fa-rocket"></i>
+                Explore Services
+              </a>
+              <a href="#contact" class="btn btn-secondary">
+                <i class="fas fa-comments"></i>
+                Chat with Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-content" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 2fr; gap: 32px; align-items: start;">
+            <div class="footer-section" style="grid-column: 1;">
+              <div class="footer-logo">
+                <img src="images/Logo.png" alt="KIFMAN x NISH Logo" />
+              </div>
+              <p class="footer-description">
+                Making digital services simple, personal, and reliable. <br>
+                We're here to help you stay connected and organized.
+              </p>
+            </div>
+            <div class="footer-section" style="grid-column: 2;">
+              <h3 class="footer-heading">Services</h3>
+              <ul class="footer-links">
+                <li><a href="services.html">Mobile Top-ups</a></li>
+                <li><a href="services.html">Bill Payments</a></li>
+                <li><a href="services.html">Game Credits</a></li>
+                <li><a href="services.html">Digital Services</a></li>
+              </ul>
+            </div>
+            <div class="footer-section" style="grid-column: 3;">
+              <h3 class="footer-heading">Company</h3>
+              <ul class="footer-links">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#why">Why Choose Us</a></li>
+                <li><a href="track.html">Track Order</a></li>
+              </ul>
+            </div>
+            <div class="footer-section" style="grid-column: 4;">
+              <h3 class="footer-heading">Support</h3>
+              <ul class="footer-links">
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </div>
+            <div class="footer-section" style="grid-column: 5;">
+              <h3 class="footer-heading">Contact Info</h3>
+              <div class="footer-contact">
+                <div class="contact-item">
+                  <i class="fas fa-phone"></i>
+                  <span>+60 19-476 1092 (Kifman)</span>
+                </div>
+                <div class="contact-item">
+                  <i class="fas fa-envelope"></i>
+                  <span>muhammadakifaiman@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                  <i class="fas fa-phone"></i>
+                  <span>+60 19-448 7256 (Nish)</span>
+                </div>
+                <div class="contact-item">
+                  <i class="fas fa-envelope"></i>
+                  <span>danishmirza0051@gmail.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="footer-bottom">
+            <div class="footer-bottom-content">
+              <p class="footer-copyright">
+                © 2025 KIFMAN x NISH. All rights reserved.
+              </p>
+              <div class="footer-legal">
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <!-- Back to Top Button -->
+      <button class="back-to-top" id="backToTop" title="Back to Top">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+
+      <!-- Floating WhatsApp Live Chat Button -->
+      <div id="wa-live-chat" class="wa-live-chat hidden">
+        <button id="waChatBtn" class="wa-chat-btn" title="Live Chat">
+          <i class="fab fa-whatsapp"></i>
+          <span class="wa-chat-label">Live Chat</span>
+          <span id="waStatus" class="wa-status"></span>
         </button>
-      </div>
-    </div>
-    <!-- Order Tracking Modal -->
-    <div id="trackOrderModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative">
-        <button id="closeTrackOrderModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
-        <h2 class="text-xl font-bold mb-4 text-center">Track Your Order</h2>
-        <form id="trackOrderForm" class="space-y-4">
-          <div>
-            <label class="block text-gray-700 font-medium mb-1" for="trackRef">Reference Number</label>
-            <input id="trackRef" type="text" class="w-full border rounded-lg px-3 py-2" placeholder="e.g. KIF-20240601-1234" required />
+        <div id="waChatMenu" class="wa-chat-menu">
+          <div class="wa-chat-header">
+            <span>Chat with us</span>
+            <div class="wa-status-text">
+              <span id="waStatusMenu" class="wa-status"></span>
+              <span id="waStatusText">Online</span>
+            </div>
           </div>
-          <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 rounded-lg">Check Status</button>
-        </form>
-        <div id="trackOrderResult" class="mt-6"></div>
-      </div>
-    </div>
-    <!-- Hamburger Menu Drawer (Left) -->
-    <div id="adminMenuDrawer" class="fixed inset-0 z-50 flex pointer-events-none">
-      <aside class="w-64 max-w-full h-full bg-white shadow-2xl p-0 flex flex-col transform -translate-x-full transition-transform duration-300 pointer-events-auto" id="adminMenuDrawerContent">
-        <div class="flex items-center justify-between px-6 py-4 border-b">
-          <h2 class="text-xl font-bold">Menu</h2>
-          <button id="closeAdminMenuDrawer" class="text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
+          <button class="wa-chat-option" onclick="window.open('https://wa.me/60194761092?text=Hi%20Kifman!%20I%20need%20help%20with%20your%20digital%20services.', '_blank')">
+            <i class="fas fa-user"></i> Kifman <span class="wa-role">(Operations)</span>
+          </button>
+          <button class="wa-chat-option" onclick="window.open('https://wa.me/60194487256?text=Hi%20Nish!%20I%20have%20a%20business%20inquiry.', '_blank')">
+            <i class="fas fa-user-tie"></i> Nish <span class="wa-role">(Business)</span>
+          </button>
+          <div class="wa-chat-hours">Business Hours: Mon-Sat 9AM-9PM</div>
         </div>
-        <nav class="flex-1 flex flex-col gap-2 p-6">
-          <button id="openAdminPanelBtn" class="main-btn main-btn-outline-yellow w-full text-left">Admin Panel</button>
-        </nav>
-      </aside>
-      <div class="flex-1 bg-black bg-opacity-40 transition-opacity duration-300 opacity-0 pointer-events-none" id="adminMenuDrawerBackdrop"></div>
-    </div>
-    <!-- Admin Panel Full Page -->
-    <div id="adminPanelPage" class="fixed inset-0 z-50 bg-white flex-col hidden">
-      <div class="flex items-center justify-between px-6 py-4 border-b shadow">
-        <h2 class="text-xl font-bold">Admin Panel - Orders</h2>
-        <button id="backToShopBtn" class="main-btn main-btn-outline-yellow">Back to Shop</button>
-      </div>
-      <div id="adminOrdersList" class="overflow-x-auto p-6 flex-1"></div>
-    </div>
-    <!-- Admin Panel Controls -->
-    <template id="adminPanelControls">
-      <div class="flex flex-col md:flex-row md:items-center gap-2 mb-4">
-        <input id="adminSearchInput" type="text" placeholder="Search by Reference" class="border rounded px-3 py-2 w-full md:w-64" />
-        <select id="adminStatusFilter" class="border rounded px-3 py-2 w-full md:w-40">
-          <option value="">All Statuses</option>
-          <option value="Pending">Pending</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-          <option value="Archived">Archived</option>
-        </select>
-        <select id="adminSort" class="border rounded px-3 py-2 w-full md:w-40">
-          <option value="date_desc">Newest First</option>
-          <option value="date_asc">Oldest First</option>
-          <option value="status">Status</option>
-          <option value="total_desc">Total High-Low</option>
-          <option value="total_asc">Total Low-High</option>
-        </select>
-      </div>
-    </template>
-    <!-- Order Details Modal -->
-    <div id="orderDetailsModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg relative">
-        <button id="closeOrderDetailsModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
-        <h2 class="text-2xl font-bold mb-4 text-center">Order Details</h2>
-        <div id="orderDetailsContent"></div>
       </div>
     </div>
+
+    <style>
+      /* Simple loading screen - no complex transitions */
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #ffffff 0%, #fefcf8 50%, #f5e6d3 100%);
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .wa-live-chat {
+        position: fixed;
+        z-index: 9999;
+        bottom: 100px;
+        right: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 16px;
+      }
+      .wa-chat-btn {
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        gap: 8px;
+        min-width: 120px;
+        justify-content: center;
+      }
+      .wa-chat-btn:hover {
+        background: linear-gradient(135deg, #128c7e 0%, #075e54 100%);
+        box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        transform: translateY(-2px);
+      }
+      .wa-chat-btn i {
+        font-size: 1.2rem;
+      }
+      .wa-chat-label {
+        font-weight: 600;
+      }
+      .wa-status {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+      }
+      .wa-status.online { 
+        background: #fff; 
+        box-shadow: 0 0 0 1px #25d366, 0 0 0 3px rgba(37, 211, 102, 0.2);
+      }
+      .wa-status.offline { 
+        background: #ccc; 
+        box-shadow: 0 0 0 1px #ccc;
+      }
+      .wa-chat-menu {
+        display: none;
+        flex-direction: column;
+        background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 15px 50px rgba(37, 211, 102, 0.25);
+        min-width: 220px;
+        padding: 20px;
+        animation: fadeInUp 0.3s ease;
+        position: relative;
+        order: -1;
+      }
+      .wa-chat-menu::before {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        right: 20px;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid #25d366;
+      }
+      .wa-chat-header {
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1rem;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .wa-chat-header .wa-status {
+        margin-left: 8px;
+        background: #fff;
+        border: 2px solid #fff;
+        flex-shrink: 0;
+      }
+      .wa-status-text {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+      .wa-chat-option {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.95);
+        color: #075e54;
+        border: none;
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-bottom: 10px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        gap: 12px;
+        transition: all 0.3s ease;
+        text-align: left;
+        width: 100%;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      .wa-chat-option:hover {
+        background: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      }
+      .wa-chat-option i {
+        color: #25d366;
+        font-size: 1.1rem;
+        min-width: 20px;
+      }
+      .wa-role {
+        font-size: 0.85rem;
+        color: #128c7e;
+        font-weight: 500;
+        margin-left: 4px;
+      }
+      .wa-chat-hours {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-top: 12px;
+        text-align: center;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        font-weight: 500;
+      }
+              @media (max-width: 600px) {
+          .wa-live-chat { 
+            right: 16px; 
+            bottom: 90px; 
+          }
+          .wa-chat-menu { 
+            min-width: 200px; 
+            padding: 16px; 
+          }
+          .wa-chat-btn { 
+            padding: 10px 12px; 
+            font-size: 0.85rem;
+            min-width: 100px;
+          }
+          .wa-chat-label {
+            display: none;
+          }
+        }
+      @keyframes fadeInUp {
+        from { 
+          opacity: 0; 
+          transform: translateY(10px) scale(0.95); 
+        }
+        to { 
+          opacity: 1; 
+          transform: translateY(0) scale(1); 
+        }
+      }
+    </style>
+    <script>
+      (function() {
+        const waBtn = document.getElementById('waChatBtn');
+        const waMenu = document.getElementById('waChatMenu');
+        const waStatus = document.getElementById('waStatus');
+        const waStatusMenu = document.getElementById('waStatusMenu');
+        // Business hours: Mon-Sat 9AM-9PM Malaysia time (GMT+8)
+        function isBusinessHours() {
+          const now = new Date();
+          const day = now.getUTCDay(); // 0=Sun, 1=Mon, ..., 6=Sat
+          const hour = now.getUTCHours();
+          // Malaysia is UTC+8
+          const myHour = (hour + 8) % 24;
+          return (day >= 1 && day <= 6) && (myHour >= 9 && myHour < 21);
+        }
+        function updateStatus() {
+          const online = isBusinessHours();
+          waStatus.classList.toggle('online', online);
+          waStatus.classList.toggle('offline', !online);
+          waStatusMenu.classList.toggle('online', online);
+          waStatusMenu.classList.toggle('offline', !online);
+          waStatus.title = online ? 'Online' : 'Offline';
+          waStatusMenu.title = waStatus.title;
+          
+          const waStatusText = document.getElementById('waStatusText');
+          if (waStatusText) {
+            waStatusText.textContent = online ? 'Online' : 'Offline';
+          }
+        }
+        updateStatus();
+        setInterval(updateStatus, 60 * 1000); // update every minute
+        waBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          waMenu.style.display = waMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+        document.addEventListener('click', function(e) {
+          if (!waMenu.contains(e.target) && e.target !== waBtn) {
+            waMenu.style.display = 'none';
+          }
+        });
+        // Optional: close menu on scroll
+        window.addEventListener('scroll', function() {
+          waMenu.style.display = 'none';
+        });
+      })();
+    </script>
+    <!-- End WhatsApp Live Chat -->
+    <script src="js/script.js"></script>
+    <script>
+      // Center contact section only when clicking Contact in the footer
+      document.addEventListener('DOMContentLoaded', function() {
+        // Find the footer Contact link
+        const footerContactLink = document.querySelector('.footer-section .footer-links a[href="#contact"]');
+        const contactSection = document.getElementById('contact');
+        if (footerContactLink && contactSection) {
+          footerContactLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            contactSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          });
+        }
+      });
+    </script>
+    <script>
+      // Center services section when clicking Explore Services in CTA
+      document.addEventListener('DOMContentLoaded', function() {
+        const exploreBtn = document.querySelector('.cta-section .btn.btn-primary[href="#services"]');
+        const servicesSection = document.getElementById('services');
+        if (exploreBtn && servicesSection) {
+          exploreBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const rect = servicesSection.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const targetY = rect.top + scrollTop - (window.innerHeight / 2) + (rect.height / 2);
+            window.scrollTo({
+              top: targetY,
+              behavior: 'smooth'
+            });
+          });
+        }
+        // Scroll and center Get In Touch section when clicking Chat with Us in CTA
+        const chatBtn = document.querySelector('.cta-section .btn.btn-secondary[href="#contact"]');
+        const contactSection = document.getElementById('contact');
+        if (chatBtn && contactSection) {
+          chatBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const rect = contactSection.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const targetY = rect.top + scrollTop - (window.innerHeight / 2) + (rect.height / 2);
+            window.scrollTo({
+              top: targetY,
+              behavior: 'smooth'
+            });
+          });
+        }
+      });
+    </script>
   </body>
 </html> 

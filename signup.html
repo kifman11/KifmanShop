@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - KIFMAN x NISH</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <style>
+    .auth-container { max-width: 400px; margin: 60px auto; background: var(--white); border-radius: 18px; box-shadow: 0 4px 24px var(--shadow-light); padding: 36px 24px; }
+    .auth-tabs { display: flex; gap: 12px; margin-bottom: 24px; }
+    .auth-tab { flex: 1; padding: 12px 0; border: none; background: var(--accent-nude); color: var(--primary-coffee); font-weight: 700; border-radius: 8px 8px 0 0; cursor: pointer; transition: background 0.2s, color 0.2s; }
+    .auth-tab.active { background: var(--primary-coffee); color: #fff; }
+    .auth-form { display: none; }
+    .auth-form.active { display: block; }
+    .order-history { margin-top: 40px; }
+    .order-card { background: var(--accent-nude); border-radius: 12px; margin-bottom: 16px; padding: 16px; box-shadow: 0 2px 8px var(--shadow-light); }
+    .order-card h4 { margin: 0 0 8px 0; color: var(--primary-coffee); }
+    .logout-btn { margin-top: 24px; background: #ef4444; color: #fff; border: none; border-radius: 8px; padding: 10px 24px; font-weight: 700; cursor: pointer; }
+    .google-btn {
+      width: 100%;
+      background: #fff;
+      color: #444;
+      border: 1.5px solid var(--border-light);
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 12px 0;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 2px 8px var(--shadow-light);
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .google-btn:hover {
+      background: #f5e6d3;
+      box-shadow: 0 4px 16px var(--shadow-light);
+    }
+    .or-separator {
+      text-align: center;
+      color: var(--text-muted);
+      margin: 18px 0 12px 0;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+    .or-separator:before, .or-separator:after {
+      content: '';
+      display: inline-block;
+      width: 30%;
+      height: 1px;
+      background: var(--border-light);
+      vertical-align: middle;
+      margin: 0 8px;
+    }
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    .success-message {
+      color: #10b981;
+      text-align: center;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <!-- Page Transition Overlay -->
+  <div id="pageTransition" class="page-transition-overlay"></div>
+  <!-- Back Button -->
+  <div style="max-width:400px; margin: 48px auto 0 auto; display:flex; align-items:center;">
+    <button id="backBtn" style="background: var(--primary-coffee); color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px var(--shadow-light); cursor: pointer; transition: background 0.2s, box-shadow 0.2s;">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+  </div>
+
+  <div class="auth-card" style="max-width: 400px; margin: 32px auto 60px auto; background: var(--white); border-radius: 18px; box-shadow: 0 4px 24px var(--shadow-light); padding: 36px 28px 28px 28px; display: flex; flex-direction: column; align-items: stretch;">
+    <h2 class="auth-title" style="text-align: center; color: var(--primary-coffee); font-size: 1.7rem; font-weight: 800; margin-bottom: 28px; letter-spacing: 0.5px;">Sign Up</h2>
+    <form id="signupForm" style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <label for="signupName" class="auth-label" style="color: var(--primary-coffee); font-weight: 600;">Full Name</label>
+        <input type="text" id="signupName" name="name" class="auth-input" required style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--border-light); background: var(--bg-light); color: var(--text-dark); font-size: 1rem;">
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <label for="signupEmail" class="auth-label" style="color: var(--primary-coffee); font-weight: 600;">Email</label>
+        <input type="email" id="signupEmail" name="email" class="auth-input" required style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--border-light); background: var(--bg-light); color: var(--text-dark); font-size: 1rem;">
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <label for="signupPassword" class="auth-label" style="color: var(--primary-coffee); font-weight: 600;">Password</label>
+        <input type="password" id="signupPassword" name="password" class="auth-input" required minlength="6" style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--border-light); background: var(--bg-light); color: var(--text-dark); font-size: 1rem;">
+        <small style="color: var(--text-muted); font-size: 0.875rem;">Password must be at least 6 characters long</small>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <label for="signupConfirmPassword" class="auth-label" style="color: var(--primary-coffee); font-weight: 600;">Confirm Password</label>
+        <input type="password" id="signupConfirmPassword" name="confirmPassword" class="auth-input" required style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--border-light); background: var(--bg-light); color: var(--text-dark); font-size: 1rem;">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px;">Create Account</button>
+      <div id="signupError" style="color:#ef4444; margin-top:4px;"></div>
+    </form>
+    <div class="or-separator" style="text-align: center; color: var(--text-muted); margin: 22px 0 18px 0; font-weight: 600; letter-spacing: 0.5px; position: relative;">
+      <span style="background: var(--white); padding: 0 12px; position: relative; z-index: 1;">or</span>
+      <span style="position: absolute; left: 0; top: 50%; width: 100%; height: 1px; background: var(--border-light); z-index: 0;"></span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px;">
+      <button class="social-btn google-btn" id="googleSignupBtn" style="width: 100%; background: #fff; color: #444; border: 1.5px solid var(--border-light); border-radius: 8px; font-weight: 600; font-size: 1rem; padding: 12px 0; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 2px 8px var(--shadow-light); cursor: pointer; transition: background 0.2s, box-shadow 0.2s;">
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" style="width:22px; height:22px;"> Sign up with Google
+      </button>
+      <!-- Facebook signup button with Font Awesome icon -->
+      <button class="social-btn facebook-btn" id="facebookSignupBtn" style="width: 100%; background: #1877f3; color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; padding: 12px 0; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 2px 8px var(--shadow-light); cursor: pointer; transition: background 0.2s, box-shadow 0.2s;">
+        <i class="fab fa-facebook-f" style="width:22px; height:22px; font-size:22px;"></i> Sign up with Facebook
+      </button>
+    </div>
+    <div class="auth-footer" style="text-align: center; margin-top: 18px; color: var(--text-muted); font-size: 1rem;">
+      Already have an account?
+      <a href="login.html" class="auth-link" style="color: var(--primary-coffee); text-decoration: underline; font-weight: 700; margin-left: 4px; cursor: pointer;">Log in</a>
+    </div>
+  </div>
+
+  <script>
+    // Firebase Configuration
+    // Replace with your Firebase config from Firebase Console
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // DOM Elements
+    const signupForm = document.getElementById('signupForm');
+    const signupError = document.getElementById('signupError');
+    const googleSignupBtn = document.getElementById('googleSignupBtn');
+    const facebookSignupBtn = document.getElementById('facebookSignupBtn');
+
+    // Loading state management
+    function setLoading(isLoading) {
+      const submitBtn = signupForm.querySelector('button[type="submit"]');
+      if (isLoading) {
+        submitBtn.textContent = 'Creating Account...';
+        submitBtn.classList.add('loading');
+        signupForm.classList.add('loading');
+      } else {
+        submitBtn.textContent = 'Create Account';
+        submitBtn.classList.remove('loading');
+        signupForm.classList.remove('loading');
+      }
+    }
+
+    // Show success message
+    function showSuccess(message) {
+      signupError.textContent = '';
+      signupError.className = 'success-message';
+      signupError.textContent = message;
+    }
+
+    // Show error message
+    function showError(message) {
+      signupError.className = '';
+      signupError.textContent = message;
+    }
+
+    // Validate password match
+    function validatePasswords() {
+      const password = document.getElementById('signupPassword').value;
+      const confirmPassword = document.getElementById('signupConfirmPassword').value;
+      
+      if (password !== confirmPassword) {
+        showError('Passwords do not match.');
+        return false;
+      }
+      
+      if (password.length < 6) {
+        showError('Password must be at least 6 characters long.');
+        return false;
+      }
+      
+      return true;
+    }
+
+    // Handle email/password signup
+    signupForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      setLoading(true);
+      showError('');
+
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+
+      // Validate passwords
+      if (!validatePasswords()) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        
+        // Update user profile with display name
+        await userCredential.user.updateProfile({
+          displayName: name
+        });
+
+        // Save user data to Firestore
+        await db.collection('users').doc(userCredential.user.uid).set({
+          email: email,
+          displayName: name,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        showSuccess('Account created successfully! Redirecting...');
+        
+        // Store user info
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userId', userCredential.user.uid);
+        
+        // Redirect after a short delay
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
+        
+      } catch (error) {
+        console.error('Signup error:', error);
+        switch (error.code) {
+          case 'auth/email-already-in-use':
+            showError('An account with this email already exists.');
+            break;
+          case 'auth/invalid-email':
+            showError('Please enter a valid email address.');
+            break;
+          case 'auth/weak-password':
+            showError('Password is too weak. Please choose a stronger password.');
+            break;
+          case 'auth/operation-not-allowed':
+            showError('Email/password accounts are not enabled. Please contact support.');
+            break;
+          default:
+            showError('Account creation failed. Please try again.');
+        }
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    // Google Signup
+    googleSignupBtn.addEventListener('click', async function() {
+      setLoading(true);
+      showError('');
+
+      const provider = new firebase.auth.GoogleAuthProvider();
+      
+      try {
+        const result = await auth.signInWithPopup(provider);
+        showSuccess('Google signup successful! Redirecting...');
+        
+        // Store user info
+        localStorage.setItem('userEmail', result.user.email);
+        localStorage.setItem('userId', result.user.uid);
+        
+        // Save user data to Firestore
+        await db.collection('users').doc(result.user.uid).set({
+          email: result.user.email,
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+        
+        // Redirect after a short delay
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
+        
+      } catch (error) {
+        console.error('Google signup error:', error);
+        if (error.code === 'auth/popup-closed-by-user') {
+          showError('Signup cancelled. Please try again.');
+        } else {
+          showError('Google signup failed. Please try again.');
+        }
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    // Facebook Signup
+    facebookSignupBtn.addEventListener('click', async function() {
+      setLoading(true);
+      showError('');
+
+      const provider = new firebase.auth.FacebookAuthProvider();
+      
+      try {
+        const result = await auth.signInWithPopup(provider);
+        showSuccess('Facebook signup successful! Redirecting...');
+        
+        // Store user info
+        localStorage.setItem('userEmail', result.user.email);
+        localStorage.setItem('userId', result.user.uid);
+        
+        // Save user data to Firestore
+        await db.collection('users').doc(result.user.uid).set({
+          email: result.user.email,
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+        
+        // Redirect after a short delay
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
+        
+      } catch (error) {
+        console.error('Facebook signup error:', error);
+        if (error.code === 'auth/popup-closed-by-user') {
+          showError('Signup cancelled. Please try again.');
+        } else {
+          showError('Facebook signup failed. Please try again.');
+        }
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    // Back button functionality
+    document.getElementById('backBtn').onclick = function() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = 'index.html';
+      }
+    };
+
+    // Page Transition System
+    (function() {
+      const pageTransition = document.getElementById('pageTransition');
+      
+      if (!pageTransition) return;
+      
+      function showPageTransition() {
+        pageTransition.classList.add('active');
+      }
+      
+      function hidePageTransition() {
+        pageTransition.classList.remove('active');
+      }
+      
+      function setupPageTransitions() {
+        const externalLinks = document.querySelectorAll('a[href*=".html"]:not([href^="#"])');
+        
+        externalLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            if (href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+              return;
+            }
+            
+            showPageTransition();
+            
+            setTimeout(() => {
+              window.location.href = href;
+            }, 300);
+          });
+        });
+      }
+      
+      window.addEventListener('load', () => {
+        hidePageTransition();
+      });
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupPageTransitions);
+      } else {
+        setupPageTransitions();
+      }
+    })();
+  </script>
+</body>
+</html> 

@@ -1,194 +1,1278 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Services - Kifman Shop</title>
-    <!-- Fixed CSS path -->
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-  </head>
-  <body class="bg-black min-h-screen flex flex-col text-white">
-    <!-- Header -->
-    <header class="w-full flex items-center justify-between px-10 py-6 glass-header sticky top-0 z-40">
-      <div class="flex items-center gap-4">
-        <img src="https://ucarecdn.com/6e2e2e2e-1234-5678-9101-abcdefabcdef/logo.png" alt="Kifman Shop Logo" class="h-10 w-auto" onerror="this.style.display='none'" />
-        <span class="text-3xl font-extrabold tracking-tight uppercase">KIFMAN SHOP</span>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services - KIFMAN x NISH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Cart Navigation Bar -->
+  <nav class="cart-nav" id="cartNav">
+    <div class="cart-nav-container">
+      <button id="cartBtn" class="cart-btn" title="Shopping Cart" style="position:relative;">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </nav>
+  <!-- Cart Drawer (Left Side) -->
+  <div id="cartDrawerBg" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.18); z-index:11000;"></div>
+  <aside id="cartDrawer" style="display:none; position:fixed; top:0; right:0; height:100vh; width:400px; max-width:98vw; background:var(--white); box-shadow:-4px 0 32px rgba(139,69,19,0.18); border-radius:18px 0 0 18px; z-index:11001; transform:translateX(100%); transition:transform 0.4s cubic-bezier(.4,0,.2,1); display:flex; flex-direction:column;">
+    <button id="closeCartDrawer" style="position:absolute; top:16px; right:16px; background:none; border:none; color:#8B4513; font-size:1.5rem; cursor:pointer;"><i class="fas fa-times"></i></button>
+    <div style="padding:32px 0 0 0;">
+      <h2 style="color:var(--primary-coffee); font-size:1.45rem; font-weight:800; margin:0 0 18px 0; text-align:center; letter-spacing:0.5px;">Your Cart</h2>
+    </div>
+    <div id="cartDrawerItems" style="flex:1; min-height:60px; margin-bottom:18px; color:var(--text-dark); padding:0 24px; overflow-y:auto;"></div>
+    <div style="padding:0 24px 24px 24px;">
+      <button id="cartDrawerToPaymentBtn" class="btn btn-primary" style="width:100%; font-size:1.08rem; padding:14px 0; text-align:center; font-weight:700; letter-spacing:0.5px; display:flex; align-items:center; justify-content:center;">Proceed to Payment</button>
+    </div>
+  </aside>
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" id="breadcrumb">
+    <div class="breadcrumb-logo">
+      <a href="index.html"><img src="images/Logo.png" alt="KIFMAN x NISH Logo" /></a>
+    </div>
+    <div class="breadcrumb-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="track.html" class="nav-link">Track Order</a>
+    </div>
+  </nav>
+  <!-- Main Navigation -->
+  <nav class="floating-nav" id="mainNav">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="index.html"><img src="images/Logo.png" alt="KIFMAN x NISH Logo" /></a>
       </div>
-      <nav class="flex items-center gap-6">
-        <a href="index.html" class="main-btn main-btn-outline-yellow">Home</a>
-        <a href="services.html" class="main-btn main-btn-outline-yellow">Services</a>
-        <a href="cart.html" class="main-btn main-btn-outline-yellow">Cart</a>
-        <a href="track.html" class="main-btn main-btn-outline-yellow">Track Order</a>
-        <a href="admin.html" class="main-btn main-btn-outline-yellow">Admin</a>
-        <a href="about.html" class="main-btn main-btn-outline-yellow">About</a>
-        <!-- Add Track Order button for modal -->
-        <button id="trackOrderBtn" class="main-btn main-btn-outline-yellow text-base font-semibold px-6 py-2 border-2 border-white/20 rounded-full hover:bg-white/10 transition">Track Order</button>
-        <button id="cartBtn" class="relative flex items-center gap-2 text-2xl font-semibold text-white hover:text-blue-400 transition">
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="track.html" class="nav-link">Track Order</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" type="button">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Browse & Order Instantly</span>
+      </div>
+      <h1 class="hero-headline">
+        Order Digital Services<br>
+        <span class="hero-brand">Fast, Easy & Secure</span>
+      </h1>
+      <p class="hero-subtitle">
+        Top up your mobile, pay utility bills, or buy game credits—all in one place. Choose your service, fill in your details, and get instant confirmation. No hassle, no hidden fees, just simple digital ordering.
+      </p>
+      <div class="hero-actions">
+        <a href="#services" class="btn btn-primary">
           <i class="fas fa-shopping-cart"></i>
-          <span id="cartCount" class="bg-blue-500 text-white rounded-full px-2 py-0.5 text-xs font-bold absolute -top-2 -right-3">0</span>
-        </button>
-      </nav>
-    </header>
-    <!-- Service Selection Bar (Bottom) -->
-    <nav class="service-bar">
-      <button class="service-btn flex flex-col items-center gap-1" data-service="utility">
-        <i class="fas fa-bolt"></i>
-        <span>Utility</span>
-      </button>
-      <button class="service-btn flex flex-col items-center gap-1" data-service="game">
-        <i class="fas fa-gamepad"></i>
-        <span>Game</span>
-      </button>
-      <button class="service-btn flex flex-col items-center gap-1" data-service="prepaid">
-        <i class="fas fa-mobile-alt"></i>
-        <span>Prepaid</span>
-      </button>
-      <button class="service-btn flex flex-col items-center gap-1" data-service="postpaid">
-        <i class="fas fa-file-invoice-dollar"></i>
-        <span>Postpaid</span>
-      </button>
-    </nav>
-    <!-- Service Forms (hidden by default) -->
-    <section id="serviceFormsSection" class="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center hidden">
-      <button id="closeServiceForm"
-        class="fixed top-6 right-6 z-[9999] bg-white text-gray-700 hover:text-blue-500 hover:bg-blue-100 rounded-full shadow-lg w-12 h-12 flex items-center justify-center text-3xl transition"
-        style="box-shadow: 0 4px 24px 0 #0004;">
-        <i class="fas fa-times"></i>
-      </button>
-      <div class="bg-gradient-to-br from-gray-900/95 to-black/95 rounded-3xl shadow-2xl border-2 border-blue-400/20 p-4 md:p-8 w-full max-w-2xl relative backdrop-blur-2xl flex flex-col md:flex-row gap-6 items-stretch" style="overflow:visible;">
-        <div id="serviceFormLeft" class="hidden md:flex flex-col justify-start items-center w-1/2 pr-4 border-r border-blue-400/10 bg-gradient-to-b from-blue-900/30 to-black/10 rounded-2xl shadow-lg py-8 px-4 gap-4">
-          <!-- Icon and section header will be injected here -->
-        </div>
-        <div id="serviceFormContent" class="flex-1 bg-white/5 rounded-2xl shadow-lg p-4 md:p-6 flex flex-col gap-4"></div>
+          <span>Start Your Order</span>
+        </a>
+        <a href="track.html" class="btn btn-secondary">
+          <i class="fas fa-history"></i>
+          <span>Order History</span>
+        </a>
       </div>
-    </section>
-    <!-- Modals and Sidebars (all hidden by default, at end of body) -->
-    <!-- Cart Modal/Sidebar -->
-    <aside id="cartModal" class="cart-modal closed fixed">
-      <div class="flex items-center justify-between mb-6">
-        <h2>Your Cart</h2>
-        <button id="closeCart" class="close-btn"><i class="fas fa-times"></i></button>
+    </div>
+  </section>
+  <!-- Our Services Section -->
+  <section class="services-section" id="services" style="padding: 80px 0 60px 0; min-height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="section-header fade-in" style="text-align: center; max-width: 600px; margin-bottom: 36px;">
+        <h2 class="section-heading" style="font-size: 2.2rem; margin-bottom: 10px;">Our Services</h2>
+        <p class="section-subtitle" style="font-size: 1.15rem; color: #8B4513; margin-bottom: 10px;">
+          Everything you need for your digital life, made simple.
+        </p>
+        <p class="about-description" style="font-size: 1.05rem; color: #6B4423;">
+          We make mobile top-ups, utility bill payments, and game credits easy and affordable. No complicated processes—just simple, honest service from real people. Choose a service below to get started!
+        </p>
       </div>
-      <div id="cartItems" class="flex-1 overflow-y-auto" style="margin-bottom:18px;">
-        <p class="text-gray-500 text-center mt-10">Your cart is empty.</p>
-      </div>
-      <div style="margin-top:10px; border-top:1px solid #eee; padding-top:22px;">
-        <div class="flex items-center justify-between mb-4">
-          <span class="font-semibold">Total:</span>
-          <span id="cartTotal">RM0.00</span>
-        </div>
-        <button id="payBtn" disabled>
-          <i class="fas fa-credit-card"></i> Proceed to Payment
-        </button>
-      </div>
-    </aside>
-    <div id="cartBackdrop" class="fixed inset-0 z-40 hidden"></div>
-    <!-- Payment Modal -->
-    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg relative">
-        <button id="closePaymentModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
-        <h2 class="text-2xl font-bold mb-4 text-center">Complete Your Payment</h2>
-        <div class="mb-4">
-          <label class="block font-semibold mb-2">Select Payment Method</label>
-          <div class="flex gap-4 justify-center">
-            <button id="payMethodQR" class="main-btn main-btn-outline-yellow">QR Code</button>
-            <button id="payMethodBank" class="main-btn main-btn-outline-yellow">Bank Transfer</button>
+      <div class="services-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; width: 100%; max-width: 1400px;">
+        <div class="service-card fade-in" style="min-width: 240px; min-height: 340px; padding: 60px 32px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center;">
+          <div class="service-icon" style="width: 54px; height: 54px; border-radius: 12px; font-size: 1.5rem; margin-bottom: 18px; background: #8B4513; color: #fff; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-mobile-alt"></i>
           </div>
-        </div>
-        <div id="paymentDetails" class="mb-4 hidden">
-          <div id="qrSection" class="hidden">
-            <h4 class="font-semibold text-yellow-700 mb-2 text-center">Scan to Pay</h4>
-            <img src="https://ucarecdn.com/c484f273-e8d3-4810-95ec-60b03d3f6108/QRKifman.png" alt="QR Payment" class="w-48 mx-auto rounded-xl shadow-md" />
-            <p class="text-xs text-gray-500 mt-2 text-center">Scan the QR code to make your payment</p>
-          </div>
-          <div id="bankSection" class="hidden">
-            <h4 class="font-semibold text-yellow-700 mb-2 text-center">Bank Transfer</h4>
-            <div class="text-center text-sm">
-              <p class="font-semibold text-gray-700">Bank Name: <span class="text-yellow-600">Maybank</span></p>
-              <p class="font-semibold text-gray-700">Account Number: <span class="text-yellow-600 tracking-wider">1234 5678 9012</span></p>
-              <p class="font-semibold text-gray-700">Account Holder: <span class="text-yellow-600">Kifman Resources</span></p>
+          <h3 style="font-size: 1.13rem; margin-bottom: 10px; color: #8B4513;">Prepaid Top-up</h3>
+          <p style="font-size: 1.02rem; margin-bottom: 18px; color: #6B4423;">Instant prepaid reloads for all networks.</p>
+          <a href="#prepaid" class="btn btn-primary" style="font-size: 1rem; padding: 10px 24px; border-radius: 8px; margin-top: auto;">Prepaid</a>
             </div>
-            <p class="text-xs text-gray-500 mt-4 italic text-center">*Please upload your receipt below after transferring</p>
+        <div class="service-card fade-in" style="min-width: 240px; min-height: 340px; padding: 60px 32px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center;">
+          <div class="service-icon" style="width: 54px; height: 54px; border-radius: 12px; font-size: 1.5rem; margin-bottom: 18px; background: #8B4513; color: #fff; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-sim-card"></i>
+          </div>
+          <h3 style="font-size: 1.13rem; margin-bottom: 10px; color: #8B4513;">Postpaid Top-up</h3>
+          <p style="font-size: 1.02rem; margin-bottom: 18px; color: #6B4423;">Pay your postpaid mobile bills easily.</p>
+          <a href="#postpaid" class="btn btn-primary" style="font-size: 1rem; padding: 10px 24px; border-radius: 8px; margin-top: auto;">Postpaid</a>
+        </div>
+        <div class="service-card fade-in" style="min-width: 240px; min-height: 340px; padding: 60px 32px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center;">
+          <div class="service-icon" style="width: 54px; height: 54px; border-radius: 12px; font-size: 1.5rem; margin-bottom: 18px; background: #8B4513; color: #fff; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3 style="font-size: 1.13rem; margin-bottom: 10px; color: #8B4513;">Utility Bill</h3>
+          <p style="font-size: 1.02rem; margin-bottom: 18px; color: #6B4423;">Electricity, Water, WiFi, and Entertainment bills.</p>
+          <a href="#utility" class="btn btn-primary" style="font-size: 1rem; padding: 10px 24px; border-radius: 8px; margin-top: auto;">Utility</a>
+        </div>
+        <div class="service-card fade-in" style="min-width: 240px; min-height: 340px; padding: 60px 32px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center;">
+          <div class="service-icon" style="width: 54px; height: 54px; border-radius: 12px; font-size: 1.5rem; margin-bottom: 18px; background: #8B4513; color: #fff; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-gamepad"></i>
+          </div>
+          <h3 style="font-size: 1.13rem; margin-bottom: 10px; color: #8B4513;">Game Credits</h3>
+          <p style="font-size: 1.02rem; margin-bottom: 18px; color: #6B4423;">Buy credits for your favorite games.</p>
+          <a href="#gamecredits" class="btn btn-primary" style="font-size: 1rem; padding: 10px 24px; border-radius: 8px; margin-top: auto;">Game Credits</a>
+            </div>
+          </div>
+      <style>
+        @media (max-width: 900px) {
+          .services-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        .service-card {
+          transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .service-card:hover {
+          box-shadow: 0 8px 32px rgba(139,69,19,0.13);
+          transform: translateY(-4px) scale(1.03);
+          border-color: #c19a6b;
+        }
+        .service-card .service-icon {
+          position: relative;
+          transition: all 0.3s ease;
+        }
+        .service-card .service-icon::after {
+          content: '';
+          position: absolute;
+          inset: -2px;
+          background: linear-gradient(135deg, #D2B48C 0%, #C19A6B 100%);
+          border-radius: 18px;
+          z-index: -1;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+        .service-card:hover .service-icon {
+          transform: scale(1.1) rotate(5deg);
+        }
+        .service-card:hover .service-icon::after {
+          opacity: 1;
+        }
+      </style>
+    </div>
+  </section>
+  <!-- Information Section (Dynamic) -->
+  <section id="service-info-section" class="info-theme-section" style="width:100%; max-width:1200px; margin: 0 auto; margin-top: 64px; min-height: 320px; display: none; flex-direction: column; align-items: center; justify-content: flex-start; padding: 64px 0 64px 0;">
+    <div class="container" style="max-width: 900px; width: 100%;">
+      <div class="section-header fade-in" style="text-align: center; max-width: 600px; margin: 0 auto 36px auto;">
+        <h2 class="section-heading" style="font-size: 2rem; margin-bottom: 10px; color: var(--primary-coffee);">Service Details</h2>
+        <p class="section-subtitle" style="font-size: 1.08rem; color: var(--text-muted); margin-bottom: 0;">Fill in your details below to proceed with your selected service. All information is kept secure and confidential.</p>
+      </div>
+      <div id="service-info-content" style="width:100%; display:flex; flex-direction:row; gap:40px; align-items:flex-start; justify-content:center; min-height:320px;">
+        <div id="service-info-form-col" style="flex:1; max-width:480px; min-width:320px; background:var(--white); border-radius:18px; box-shadow:0 4px 24px var(--shadow-light); padding:40px 32px; display:flex; flex-direction:column; align-items:center;">
+          <!-- Dynamic form will be injected here -->
+        </div>
+        <div id="service-info-details-col" style="flex:1; max-width:400px; min-width:260px; background:var(--bg-light); border-radius:18px; box-shadow:0 2px 12px var(--shadow-light); padding:32px 24px; display:flex; flex-direction:column; align-items:center; min-height:320px;">
+          <h4 style="color:var(--primary-coffee); font-size:1.15rem; margin-bottom:18px;">Your Details</h4>
+          <div id="service-details-list" style="width:100%; text-align:left; color:var(--text-dark); font-size:1.05rem;"></div>
+        </div>
+      </div>
+      <style>
+        @media (max-width: 900px) {
+          #service-info-content { flex-direction: column !important; gap: 24px !important; }
+          #service-info-form-col, #service-info-details-col { max-width: 100% !important; min-width: 0 !important; }
+        }
+      </style>
+    </div>
+  </section>
+  <style>
+    .info-theme-section {
+      background: linear-gradient(135deg, var(--white) 0%, var(--bg-light) 60%, var(--accent-nude) 100%);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px var(--shadow-light);
+      border: 1.5px solid var(--border-light);
+    }
+    .info-theme-section form {
+      background: var(--white);
+      border-radius: 14px;
+      box-shadow: 0 2px 12px var(--shadow-light);
+      padding: 24px 18px 12px 18px;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+    .info-theme-section label {
+      color: var(--primary-coffee);
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .info-theme-section input,
+    .info-theme-section select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-light);
+      background: var(--bg-light);
+      color: var(--text-dark);
+      font-size: 1rem;
+      margin-bottom: 14px;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    .info-theme-section input:focus,
+    .info-theme-section select:focus {
+      border: 1.5px solid var(--primary-coffee);
+      outline: none;
+      box-shadow: 0 0 0 2px var(--accent-caramel);
+    }
+    .info-theme-section button[type='submit'] {
+      background: linear-gradient(135deg, var(--primary-coffee) 0%, var(--primary-coffee-dark) 100%);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 12px 0;
+      margin-top: 10px;
+      box-shadow: 0 2px 8px var(--shadow-coffee);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .info-theme-section button[type='submit']:hover {
+      background: linear-gradient(135deg, var(--primary-coffee-light) 0%, var(--primary-coffee) 100%);
+      box-shadow: 0 4px 16px var(--shadow-coffee);
+    }
+    /* Improved services grid for better layout - now more compact */
+    .better-services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .better-services-grid .service-card {
+      min-height: 220px;
+      padding: 18px 14px 16px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      box-shadow: 0 2px 12px rgba(139,69,19,0.06);
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid #eee;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .better-services-grid .service-card:hover {
+      box-shadow: 0 6px 18px rgba(139,69,19,0.13);
+      transform: translateY(-2px) scale(1.02);
+      border-color: #c19a6b;
+    }
+    .better-services-grid .service-icon {
+      margin: 0 auto 12px auto;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8B4513 0%, #C19A6B 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #fff;
+      box-shadow: 0 1px 6px rgba(139,69,19,0.08);
+    }
+    .better-services-grid .service-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .better-services-grid .service-content h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #8B4513;
+    }
+    .better-services-grid .service-content p {
+      color: #6B4423;
+      font-size: 0.92rem;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+    .better-services-grid .service-cta {
+      margin-top: auto;
+    }
+    .better-services-grid .btn.btn-primary {
+      font-size: 0.95rem;
+      padding: 8px 16px;
+      border-radius: 8px;
+    }
+    .services-section {
+      padding: 48px 0 32px 0;
+    }
+    .services-section .section-header {
+      margin-bottom: 18px;
+    }
+    .services-section .section-heading {
+      font-size: 1.45rem;
+      margin-bottom: 6px;
+    }
+    .services-section .section-subtitle {
+      font-size: 1rem;
+      max-width: 420px;
+      margin-bottom: 0;
+    }
+    @media (max-width: 900px) {
+      .better-services-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+      }
+    }
+  </style>
+  <style>
+    .fade-out-section {
+      opacity: 0 !important;
+      transition: opacity 0.5s cubic-bezier(.4,0,.2,1);
+    }
+  </style>
+  <script>
+    // Navigation and smooth scroll logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          const href = link.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const target = document.getElementById(href.substring(1));
+            if (target) {
+              // Scroll so the section is centered in the viewport
+              const rect = target.getBoundingClientRect();
+              const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+              const targetY = rect.top + scrollTop - (window.innerHeight / 2) + (rect.height / 2);
+              window.scrollTo({
+                top: targetY,
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+      });
+      // Hamburger menu for mobile
+      const navToggle = document.getElementById('navToggle');
+      const navLinksContainer = document.querySelector('.nav-links');
+      if (navToggle && navLinksContainer) {
+        navToggle.addEventListener('click', function() {
+          navLinksContainer.classList.toggle('open');
+        });
+      }
+
+      // Logo click scroll to top and close info section
+      document.querySelectorAll('.breadcrumb-logo a, .nav-logo a').forEach(logoLink => {
+        logoLink.setAttribute('href', '#');
+        logoLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          const infoSection = document.getElementById('service-info-section');
+          if (infoSection && infoSection.style.display !== 'none') {
+            infoSection.classList.add('fade-out-section');
+            setTimeout(() => {
+              infoSection.style.display = 'none';
+              infoSection.classList.remove('fade-out-section');
+            }, 500);
+          }
+        });
+      });
+    });
+  </script>
+  <script>
+    // Scroll-triggered animations for fade-in and slide-in
+    document.addEventListener('DOMContentLoaded', function() {
+      function revealOnScroll() {
+        const reveals = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+        const windowHeight = window.innerHeight;
+        reveals.forEach(function(el) {
+          const elementTop = el.getBoundingClientRect().top;
+          if (elementTop < windowHeight - 50) {
+            el.classList.add('visible');
+          }
+        });
+      }
+      window.addEventListener('scroll', revealOnScroll);
+      revealOnScroll(); // Initial check
+    });
+  </script>
+  <script>
+    // Dynamic info section logic
+    document.addEventListener('DOMContentLoaded', function() {
+      function setServiceInfo(type) {
+        const info = document.getElementById('service-info-form-col');
+        const details = document.getElementById('service-details-list');
+        if (!info) return;
+        let formHtml = '';
+        if (type === 'prepaid') {
+          formHtml = `
+            <h3 style='font-size:1.3rem; color:#8B4513; margin-bottom:12px;'>Prepaid Top-up</h3>
+            <form id='prepaidForm' style='width:100%; text-align:left;'>
+              <label>Telco Type<br>
+                <select name='telco' id='prepaidTelcoSelect' required>
+                  <option value="" disabled selected>Select your Telco</option>
+                  <option value="Celcom/XPAX">Celcom/XPAX</option>
+                  <option value="Maxis/Hotlink">Maxis/Hotlink</option>
+                  <option value="Digi/ToneWOW">Digi/ToneWOW</option>
+                  <option value="UMobile">UMobile</option>
+                  <option value="TuneTalk/Halo">TuneTalk/Halo</option>
+                  <option value="OneXOX/XOX">OneXOX/XOX</option>
+                  <option value="RedOne">RedOne</option>
+                  <option value="Yes4G">Yes4G</option>
+                </select>
+              </label><br>
+              <label>Phone Number<br>
+                <input name='phone' type='tel' required placeholder='e.g. 012-345 6789' />
+              </label><br>
+              <label>Packages Available<br>
+                <select name='package' id='prepaidPackageSelect' required>
+                  <option value="" disabled selected>Select the Package</option>
+                </select>
+              </label><br>
+              <button type='submit' class='btn btn-primary' style='margin-top:18px;width:100%; text-align:center; display:flex; align-items:center; justify-content:center;'>Add to Cart</button>
+            </form>
+          `;
+        } else if (type === 'postpaid') {
+          formHtml = `
+            <h3 style='font-size:1.3rem; color:#8B4513; margin-bottom:12px;'>Postpaid Top-up</h3>
+            <form id='postpaidForm' style='width:100%; text-align:left;'>
+              <label>Telco Type<br>
+                <select name='telco' required>
+                  <option value="" disabled selected>Select your Telco</option>
+                  <option>Maxis</option>
+                  <option>Digi</option>
+                  <option>Celcom</option>
+                  <option>U Mobile</option>
+                  <option>Unifi Mobile</option>
+                  <option>Yes</option>
+                </select>
+              </label><br>
+              <label>Phone Number<br>
+                <input name='phone' type='tel' required placeholder='e.g. 012-345 6789' />
+              </label><br>
+              <label>Bill Amount (RM)<br>
+                <input name='amount' type='number' min='10' max='350' required placeholder='RM10 - RM350' />
+              </label>
+              <button type='submit' class='btn btn-primary' style='margin-top:18px;width:100%; text-align:center; display:flex; align-items:center; justify-content:center;'>Add to Cart</button>
+            </form>
+          `;
+        } else if (type === 'utility') {
+          formHtml = `
+            <h3 style='font-size:1.3rem; color:#8B4513; margin-bottom:12px;'>Utility Bill Payment</h3>
+            <form id='utilityForm' style='width:100%; text-align:left;'>
+              <label>Utility Type<br>
+                <select name='utility' id='utilityTypeSelect' required>
+                  <option value="" disabled selected>Select the Utility</option>
+                  <option value="electricity">Electricity</option>
+                  <option value="water">Water</option>
+                  <option value="wifi">WiFi</option>
+                  <option value="entertainment">Entertainment</option>
+                </select>
+              </label><br>
+              <label>Provider<br>
+                <select name='provider' id='providerSelect' required>
+                  <option value="" disabled selected>Select the Provider</option>
+                </select>
+              </label><br>
+              <label>Account Number<br>
+                <input name='account' type='text' required placeholder='e.g. 1234567890' />
+              </label><br>
+              <label>Bill Amount (RM)<br>
+                <input name='amount' type='number' min='10' max='1000' required placeholder='RM10 - RM1000' />
+              </label>
+              <button type='submit' class='btn btn-primary' style='margin-top:18px;width:100%; text-align:center; display:flex; align-items:center; justify-content:center;'>Add to Cart</button>
+            </form>
+          `;
+        } else if (type === 'gamecredits') {
+          formHtml = `
+            <h3 style='font-size:1.3rem; color:#8B4513; margin-bottom:12px;'>Game Credits</h3>
+            <form id='gameForm' style='width:100%; text-align:left;'>
+              <label style='margin-bottom:16px; display:block;'>Game Type
+                <select name='game' id='gameTypeSelect' required>
+                  <option value="" disabled selected>Select your Game</option>
+                  <option value="Mobile Legends">Mobile Legends</option>
+                  <option value="PUBG Mobile">PUBG Mobile</option>
+                  <option value="Free Fire">Free Fire</option>
+                  <option value="COD Mobile">COD Mobile</option>
+                  <option value="Genshin Impact">Genshin Impact</option>
+                  <option value="Dragon Raja">Dragon Raja</option>
+                  <option value="Lords Mobile">Lords Mobile</option>
+                  <option value="Be The King">Be The King</option>
+                  <option value="Marvel SuperWar">Marvel SuperWar</option>
+                  <option value="Ragnarok X: Next Generation">Ragnarok X: Next Generation</option>
+                  <option value="Ragnarok Mobile: Eternal Love">Ragnarok Mobile: Eternal Love</option>
+                </select>
+              </label>
+              <label style='margin-bottom:16px; display:block;'>Packages Available
+                <select name='package' id='gamePackageSelect' required>
+                  <option value="" disabled selected>Select the Package</option>
+                </select>
+              </label>
+              <label id='gameIdLabel' style='display:block; margin-bottom:16px;'><span id='gameIdLabelText'>Game ID</span>
+                <input name='gameid' id='gameIdInput' type='text' required placeholder='e.g. 123456789' maxlength='10' />
+              </label>
+              <div id='zoneIdWrapper' style='display:none; margin-bottom:16px;'>
+                <label style='display:block; margin-bottom:0;'>Zone ID
+                  <input name='zoneid' id='zoneIdInput' type='text' placeholder='e.g. 1234' maxlength='5' />
+                </label>
+              </div>
+              <button type='submit' class='btn btn-primary' style='width:100%; text-align:center; display:flex; align-items:center; justify-content:center;'>Add to Cart</button>
+            </form>
+          `;
+        } else {
+          formHtml = `<h3 style='font-size:1.3rem; color:#8B4513; margin-bottom:12px;'>Service Information</h3><p style='color:#6B4423; font-size:1.05rem;'>Select a service above to view more information or proceed with your order.</p>`;
+        }
+        info.innerHTML = formHtml;
+        if (details) details.innerHTML = '';
+        // Add real-time update logic
+        const form = info.querySelector('form');
+        if (form && details) {
+          // Disable all except the first field
+          const fields = Array.from(form.querySelectorAll('select, input'));
+          fields.forEach((field, idx) => {
+            if (idx > 0) field.disabled = true;
+          });
+          // Enable next field when previous is filled
+          fields.forEach((field, idx) => {
+            field.addEventListener('input', function() {
+              // Enable next field if this one is filled
+              if (field.value && idx + 1 < fields.length) {
+                fields[idx + 1].disabled = false;
+              } else if (idx + 1 < fields.length) {
+                fields[idx + 1].disabled = true;
+                // Also clear and disable all subsequent fields
+                for (let j = idx + 1; j < fields.length; j++) {
+                  fields[j].value = '';
+                  fields[j].disabled = true;
+                }
+              }
+            });
+          });
+          // Clear all other fields when the first select is changed (for all services)
+          if (form.id === 'prepaidForm' || form.id === 'postpaidForm' || form.id === 'utilityForm') {
+            const firstSelect = form.querySelector('select');
+            if (firstSelect) {
+              firstSelect.addEventListener('change', function() {
+                // Clear and disable all other fields
+                fields.forEach((field, idx) => {
+                  if (idx > 0) {
+                    field.value = '';
+                    field.disabled = true;
+                  }
+                });
+                // Enable the next field if first select is selected
+                if (firstSelect.value && fields[1]) {
+                  fields[1].disabled = false;
+                }
+              });
+            }
+            // For utility form, also clear and disable fields after provider when provider changes
+            if (form.id === 'utilityForm') {
+              const providerSelect = form.querySelector('select[name="provider"]');
+              if (providerSelect) {
+                providerSelect.addEventListener('change', function() {
+                  // Find index of providerSelect in fields
+                  const idx = fields.indexOf(providerSelect);
+                  if (idx !== -1) {
+                    for (let j = idx + 1; j < fields.length; j++) {
+                      fields[j].value = '';
+                      fields[j].disabled = true;
+                    }
+                    // Enable the next field (account number) if provider is selected
+                    if (providerSelect.value && fields[idx + 1]) {
+                      fields[idx + 1].disabled = false;
+                    }
+                  }
+                });
+              }
+            }
+          }
+          // Prepaid telco/package dynamic update
+          if (form.id === 'prepaidForm') {
+            const telcoPackages = {
+              'Celcom/XPAX': ['RM5', 'RM10', 'RM30', 'RM50', 'RM100'],
+              'Maxis/Hotlink': ['RM5', 'RM10', 'RM20', 'RM30', 'RM50', 'RM100'],
+              'Digi/ToneWOW': ['RM5', 'RM10', 'RM20', 'RM30', 'RM50', 'RM100'],
+              'UMobile': ['RM5', 'RM10', 'RM20', 'RM30', 'RM50', 'RM100'],
+              'TuneTalk/Halo': ['RM5', 'RM10', 'RM20', 'RM30', 'RM50', 'RM100'],
+              'OneXOX/XOX': ['RM5', 'RM10', 'RM20', 'RM30', 'RM50', 'RM100'],
+              'RedOne': ['RM10', 'RM20', 'RM30', 'RM40', 'RM50'],
+              'Yes4G': ['RM5', 'RM10', 'RM30', 'RM50', 'RM100']
+            };
+            const telcoSelect = form.querySelector('#prepaidTelcoSelect');
+            const packageSelect = form.querySelector('#prepaidPackageSelect');
+            const phoneInput = form.querySelector('input[name="phone"]');
+            if (telcoSelect && packageSelect && phoneInput) {
+              packageSelect.disabled = true;
+              phoneInput.disabled = true;
+              telcoSelect.addEventListener('change', function() {
+                // Clear and disable phone and package fields
+                phoneInput.value = '';
+                phoneInput.disabled = false;
+                packageSelect.innerHTML = '<option value="" disabled selected>Select the Package</option>';
+                packageSelect.disabled = true;
+              });
+              phoneInput.addEventListener('input', function() {
+                // Enable package field only if phone is filled
+                if (phoneInput.value) {
+                  // Populate package options
+                  packageSelect.innerHTML = '<option value="" disabled selected>Select the Package</option>';
+                  const pkgs = telcoPackages[telcoSelect.value] || [];
+                  pkgs.forEach(pkg => {
+                    const o = document.createElement('option');
+                    o.value = pkg;
+                    o.textContent = pkg;
+                    packageSelect.appendChild(o);
+                  });
+                  packageSelect.disabled = pkgs.length === 0;
+                } else {
+                  packageSelect.value = '';
+                  packageSelect.disabled = true;
+                }
+              });
+            }
+          }
+          // Real-time details update
+          form.addEventListener('input', function() {
+            let html = '';
+            let paymentAmount = '';
+            let amountValue = '';
+            Array.from(form.elements).forEach(el => {
+              if (el.name && (el.type !== 'submit' && el.type !== 'button')) {
+                let label = el.closest('label') ? el.closest('label').childNodes[0].textContent.trim() : el.name;
+                let value = el.value;
+                if (el.tagName === 'SELECT') {
+                  value = el.options[el.selectedIndex].text;
+                }
+                if (el.type === 'number' && value === '') return;
+                if (el.type === 'tel' && value === '') return;
+                if (el.type === 'text' && value === '') return;
+                if (el.name === 'zoneid' && value === 'Not Required') return;
+                // Change label for package fields in details card
+                if (el.name === 'package') label = 'Package';
+                html += `<div style='margin-bottom:10px;'><span style='color:var(--primary-coffee);font-weight:600;'>${label}:</span> ${value}</div>`;
+                // Find payment amount for each service
+                if (form.id === 'prepaidForm' && el.name === 'package' && el.value) {
+                  // Extract RM amount from package string (e.g. 'RM10')
+                  const match = el.value.match(/RM(\d+)/);
+                  if (match) paymentAmount = parseFloat(match[1]).toFixed(2);
+                }
+                if (form.id === 'postpaidForm' && el.name === 'amount' && el.value) {
+                  paymentAmount = parseFloat(el.value).toFixed(2);
+                }
+                if (form.id === 'utilityForm' && el.name === 'amount' && el.value) {
+                  paymentAmount = parseFloat(el.value).toFixed(2);
+                }
+                if (form.id === 'gameForm' && el.name === 'package' && el.value) {
+                  // Extract RM amount from package string (e.g. 'RM10 = 141 Diamond')
+                  const match = el.value.match(/RM(\d+)/);
+                  if (match) paymentAmount = parseFloat(match[1]).toFixed(2);
+                }
+              }
+            });
+            // Add Payment Amount as last detail if available
+            if (paymentAmount) {
+              html += `<div style="margin:18px 0 0 0; padding:14px 0; background:linear-gradient(90deg,#f5e6d3 60%,#fff 100%); border-radius:10px; text-align:center;">
+                <span style="color:#8B4513; font-size:1.18rem; font-weight:800; letter-spacing:0.5px;">Payment Amount</span><br>
+                <span style="color:#8B4513; font-size:2rem; font-weight:900; letter-spacing:1px;">RM ${paymentAmount}</span>
+              </div>`;
+            }
+            details.innerHTML = html || '<span style="color:var(--text-muted);">No details entered yet.</span>';
+          });
+          // Add to Cart notification and redirect logic
+          form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Gather form data as cart item
+            const formData = new FormData(form);
+            const item = {};
+            formData.forEach((value, key) => { item[key] = value; });
+            // For dropdowns, store the selected option's text for user-facing fields
+            ['telco', 'provider', 'game', 'package', 'utility'].forEach(field => {
+              const el = form.querySelector(`[name='${field}']`);
+              if (el && el.tagName === 'SELECT' && el.selectedIndex >= 0) {
+                const text = el.options[el.selectedIndex].text;
+                if (text) item[field] = text;
+              }
+            });
+            // Add service type for clarity
+            if (form.id === 'prepaidForm') item.service = 'Prepaid Top-up';
+            if (form.id === 'postpaidForm') item.service = 'Postpaid Top-up';
+            if (form.id === 'utilityForm') item.service = 'Utility Bill';
+            if (form.id === 'gameForm') item.service = 'Game Credits';
+            // Add to cart in localStorage
+            let cart = [];
+            try {
+              cart = JSON.parse(localStorage.getItem('cart')) || [];
+            } catch {}
+            cart.push(item);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            // Update cart count
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) cartCount.textContent = cart.length;
+            // Always update cart drawer contents after adding
+            if (window.renderCartDrawer) window.renderCartDrawer();
+            // Show modal popup notification with dialog (refactored: only navigation, not add to cart again)
+            let modalBg = document.createElement('div');
+            modalBg.id = 'cart-modal-bg';
+            modalBg.style.position = 'fixed';
+            modalBg.style.top = '0';
+            modalBg.style.left = '0';
+            modalBg.style.width = '100vw';
+            modalBg.style.height = '100vh';
+            modalBg.style.background = 'rgba(0,0,0,0.18)';
+            modalBg.style.zIndex = '10000';
+            modalBg.style.display = 'flex';
+            modalBg.style.alignItems = 'center';
+            modalBg.style.justifyContent = 'center';
+            let modal = document.createElement('div');
+            modal.id = 'cart-modal-popup';
+            modal.style.background = 'linear-gradient(90deg,#f5e6d3 60%,#fff 100%)';
+            modal.style.color = '#8B4513';
+            modal.style.fontWeight = '700';
+            modal.style.fontSize = '1.15rem';
+            modal.style.padding = '36px 36px 28px 36px';
+            modal.style.borderRadius = '18px';
+            modal.style.boxShadow = '0 8px 32px rgba(139,69,19,0.18)';
+            modal.style.textAlign = 'center';
+            modal.style.minWidth = '320px';
+            modal.innerHTML = `
+              <div style='margin-bottom:18px;'>
+                <span style="display:inline-block;vertical-align:middle;">
+                  <i class="fas fa-shopping-cart" id="cart-anim-icon" style="color:#8B4513;font-size:2.1rem;transform:scale(1);"></i>
+                </span>
+                <span style="display:inline-block;vertical-align:middle;margin-left:10px;font-size:1.18rem;font-weight:800;">Your selection has been added to the cart.</span>
+              </div>
+              <div style='font-weight:600;font-size:1.08rem;margin-bottom:24px;'>Would you like to continue with this service or explore other services?</div>
+              <div style='display:flex;justify-content:center;gap:18px;'>
+                <button id='stayBtn' style='background:#8B4513;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-weight:700;font-size:1rem;cursor:pointer;'>Continue</button>
+                <button id='chooseServiceBtn' style='background:#fff;color:#8B4513;border:2px solid #8B4513;border-radius:8px;padding:10px 24px;font-weight:700;font-size:1rem;cursor:pointer;'>Explore Other Services</button>
+                <button id='goToPaymentBtn' style='background:#3b82f6;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-weight:700;font-size:1rem;cursor:pointer;'>Proceed to Payment</button>
+              </div>
+            `;
+            // Animate the cart icon
+            setTimeout(() => {
+              const cartIcon = document.getElementById('cart-anim-icon');
+              if (cartIcon) {
+                cartIcon.animate([
+                  { transform: 'scale(1)' },
+                  { transform: 'scale(1.25) rotate(-15deg)' },
+                  { transform: 'scale(0.95) rotate(10deg)' },
+                  { transform: 'scale(1) rotate(0deg)' }
+                ], {
+                  duration: 700,
+                  easing: 'cubic-bezier(.68,-0.55,.27,1.55)',
+                });
+              }
+            }, 80);
+            // Add smooth fade and scale-in animation to modal
+            modalBg.style.opacity = '0';
+            modal.style.transform = 'scale(0.85)';
+            setTimeout(() => {
+              modalBg.style.transition = 'opacity 0.35s cubic-bezier(.4,0,.2,1)';
+              modal.style.transition = 'transform 0.35s cubic-bezier(.4,0,.2,1)';
+              modalBg.style.opacity = '1';
+              modal.style.transform = 'scale(1)';
+            }, 10);
+            document.body.appendChild(modalBg);
+            modalBg.appendChild(modal);
+            document.getElementById('stayBtn').onclick = function() {
+              modalBg.remove();
+            };
+            document.getElementById('chooseServiceBtn').onclick = function() {
+              modalBg.remove();
+              // Scroll to services section
+              const servicesSection = document.getElementById('services');
+              if (servicesSection) {
+                const rect = servicesSection.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const targetY = rect.top + scrollTop - (window.innerHeight / 2) + (rect.height / 2);
+                window.scrollTo({ top: targetY, behavior: 'smooth' });
+              }
+            };
+            document.getElementById('goToPaymentBtn').onclick = function() {
+              window.location.href = 'payment.html';
+            };
+          });
+          // Malaysian phone number mask and validation
+          const phoneInputs = form.querySelectorAll('input[type="tel"]');
+          phoneInputs.forEach(input => {
+            input.setAttribute('pattern', '^(01[0-46-9]-[0-9]{3} [0-9]{4}|01[0-46-9]-[0-9]{4} [0-9]{3})$');
+            input.setAttribute('placeholder', 'e.g. 012-345 6789');
+            input.addEventListener('input', function(e) {
+              let v = input.value.replace(/[^0-9]/g, '');
+              if (v.length > 3 && v.length <= 7) {
+                input.value = v.slice(0,3) + '-' + v.slice(3);
+              } else if (v.length > 7) {
+                input.value = v.slice(0,3) + '-' + v.slice(3,6) + ' ' + v.slice(6,10);
+              } else {
+                input.value = v;
+              }
+            });
+            form.addEventListener('submit', function(e) {
+              if (!input.value.match(/^(01[0-46-9]-[0-9]{3} [0-9]{4}|01[0-46-9]-[0-9]{4} [0-9]{3})$/)) {
+                e.preventDefault();
+                input.setCustomValidity('Please enter a valid Malaysian phone number (e.g. 012-345 6789)');
+                input.reportValidity();
+              } else {
+                input.setCustomValidity('');
+              }
+            });
+          });
+          // Utility bill amount validation
+          if (form.id === 'utilityForm') {
+            const amountInput = form.querySelector('input[name="amount"]');
+            if (amountInput) {
+              amountInput.addEventListener('input', function() {
+                if (parseFloat(amountInput.value) > 1000) {
+                  amountInput.value = 1000;
+                }
+              });
+              form.addEventListener('submit', function(e) {
+                if (parseFloat(amountInput.value) > 1000) {
+                  e.preventDefault();
+                  amountInput.setCustomValidity('Maximum allowed is RM1000');
+                  amountInput.reportValidity();
+                } else {
+                  amountInput.setCustomValidity('');
+                }
+              });
+            }
+          }
+          // Postpaid bill amount validation
+          if (form.id === 'postpaidForm') {
+            const amountInput = form.querySelector('input[name="amount"]');
+            if (amountInput) {
+              amountInput.addEventListener('input', function() {
+                if (parseFloat(amountInput.value) > 350) {
+                  amountInput.value = 350;
+                }
+              });
+              form.addEventListener('submit', function(e) {
+                if (parseFloat(amountInput.value) > 350) {
+                  e.preventDefault();
+                  amountInput.setCustomValidity('Maximum allowed is RM350');
+                  amountInput.reportValidity();
+                } else {
+                  amountInput.setCustomValidity('');
+                }
+              });
+            }
+          }
+        }
+        // Utility provider dynamic update
+        if (type === 'utility') {
+          const providerOptions = {
+            electricity: ["TNB (Tenaga Nasional Berhad)", "SESB (Sabah Electricity)", "SEB (Sarawak Energy)"],
+            water: [
+              "Indah Water",
+              "Air Selangor", "PBAPP (Penang)", "SAJ (Johor)", "LAKU (Sarawak)", "SADA (Kedah)", "SAMB (Melaka)", "SAINS (Negeri Sembilan)", "SATU (Terengganu)", "SADA (Kedah)", "SAP (Perlis)", "AKSB (Kelantan)", "PAIP (Pahang)", "LAP (Perak)", "JANS (Sabah)", "KWB (Kuching)", "JBAL (Labuan)"
+            ],
+            wifi: ["TM Unifi", "TM Streamyx", "TIME"],
+            entertainment: ["Astro"],
+          };
+          const utilitySelect = document.getElementById('utilityTypeSelect');
+          const providerSelect = document.getElementById('providerSelect');
+          if (utilitySelect && providerSelect) {
+            utilitySelect.addEventListener('change', function() {
+              const val = utilitySelect.value;
+              providerSelect.innerHTML = '<option value="" disabled selected>Select the Provider</option>';
+              if (providerOptions[val]) {
+                providerOptions[val].forEach(opt => {
+                  const o = document.createElement('option');
+                  o.value = opt;
+                  o.textContent = opt;
+                  providerSelect.appendChild(o);
+                });
+                providerSelect.disabled = false;
+              } else {
+                providerSelect.disabled = true;
+              }
+            });
+            providerSelect.disabled = true;
+          }
+        }
+        // Game packages and ID/Zone label dynamic update
+        if (type === 'gamecredits') {
+          const gamePackages = {
+            "Mobile Legends": ["RM1 = 14 Diamond", "RM3 = 42 Diamond", "RM5 = 70 Diamond", "RM10 = 141 Diamond", "RM20 = 281 Diamond", "RM25 = 345 Diamond", "RM30 = 415 Diamond", "RM50 = 708 Diamond", "RM100 = 1446 Diamond", "RM200 = 2976 Diamond", "RM500 = 7502 Diamond"],
+            "PUBG Mobile": ["RM1 = 16 UC", "RM2 = 31 UC", "RM3 = 46 UC", "RM4 = 62 UC", "RM20 = 325 UC", "RM40 = 660 UC", "RM60 = 1037 UC", "RM100 = 1800 UC", "RM200 = 3852 UC", "RM400 = 8102 UC"],
+            "Free Fire": ["RM5 = 130 Diamonds", "RM7 = 210 Diamonds", "RM10 = 260 Diamonds", "RM15 = 400 Diamonds", "RM20 = 535 Diamonds", "RM21 = 645 Diamonds", "RM30 = 800 Diamonds", "RM50 = 1350 Diamonds", "RM70 = 2200 Diamonds", "RM100 = 2800 Diamonds", "RM140 = 4450 Diamonds", "RM210 = 6900 Diamonds"],
+            "COD Mobile": ["RM10 = 252 CP", "RM20 = 527 CP", "RM30 = 789 CP", "RM40 = 1053 CP", "RM50 = 1315 CP", "RM100 = 2744 CP"],
+            "Genshin Impact": ["RM4 = 60 Genesis Crystals", "RM20 = 330 Genesis Crystals", "RM60 = 1090 Genesis Crystals", "RM130 = 2240 Genesis Crystals", "RM200 = 3880 Genesis Crystals", "RM400 = 8080 Genesis Crystals"],
+            "Dragon Raja": ["RM5 = 76 Coupons", "RM30 = 456 Coupons", "RM50 = 820 Coupons", "RM100 = 1699 Coupons"],
+            "Lords Mobile": ["RM5 = 123 Gems", "RM10 = 246 Gems", "RM30 = 737 Gems", "RM50 = 1228 Gems", "RM100 = 2455 Gems"],
+            "Be The King": ["RM4 = 60 Gold", "RM20 = 300 Gold", "RM40 = 680 Gold", "RM120 = 2040 Gold"],
+            "Marvel SuperWar": ["RM4 = 55 Star Credits", "RM20 = 275 Star Credits", "RM40 = 565 Star Credits", "RM80 = 1155 Star Credits", "RM130 = 1765 Star Credits"],
+            "Ragnarok X: Next Generation": ["RM10 = 1280 Crystals", "RM20 = 2580 Crystals", "RM30 = 3870 Crystals", "RM40 = 5150 Crystals", "RM50 = 6450 Crystals", "RM100 = 12900 Crystals", "RM200 = 26780 Crystals"],
+            "Ragnarok Mobile: Eternal Love": ["RM4 = 6 Big Cat Coins", "RM8 = 12 Big Cat Coins", "RM12 = 18 Big Cat Coins", "RM16 = 24 Big Cat Coins", "RM20 = 36 Big Cat Coins", "RM40 = 72 Big Cat Coins", "RM80 = 145 Big Cat Coins", "RM200 = 373 Big Cat Coins"]
+          };
+          const gameIdLabels = {
+            "Mobile Legends": "Game ID",
+            "PUBG Mobile": "Player ID",
+            "Free Fire": "Player ID",
+            "COD Mobile": "Player ID",
+            "Genshin Impact": "UID",
+            "Dragon Raja": "Character ID",
+            "Lords Mobile": "Player ID",
+            "Be The King": "Player ID",
+            "Marvel SuperWar": "Player ID",
+            "Ragnarok X: Next Generation": "Character ID",
+            "Ragnarok Mobile: Eternal Love": "Character ID"
+          };
+          const gameIdMaxLengths = {
+            "Mobile Legends": 10,
+            "PUBG Mobile": 11,
+            "Free Fire": 10,
+            "Genshin Impact": 14,
+            "Dragon Raja": 15,
+            "Lords Mobile": 15,
+            "Be The King": 15,
+            "COD Mobile": 15,
+            "Marvel SuperWar": 15,
+            "Ragnarok X: Next Generation": 15,
+            "Ragnarok Mobile: Eternal Love": 15
+          };
+          const gameSelect = document.getElementById('gameTypeSelect');
+          const packageSelect = document.getElementById('gamePackageSelect');
+          const gameIdLabel = document.getElementById('gameIdLabel');
+          const gameIdInput = document.getElementById('gameIdInput');
+          const zoneIdWrapper = document.getElementById('zoneIdWrapper');
+          const zoneIdInput = document.getElementById('zoneIdInput');
+          if (gameSelect && packageSelect) {
+            gameSelect.addEventListener('change', function() {
+              const val = gameSelect.value;
+              // Clear other fields
+              if (packageSelect) {
+                packageSelect.selectedIndex = 0;
+                packageSelect.disabled = true;
+              }
+              if (gameIdInput) gameIdInput.value = '';
+              if (zoneIdInput) zoneIdInput.value = '';
+              // Update packages
+              packageSelect.innerHTML = '<option value="" disabled selected>Select the Package</option>';
+              if (gamePackages[val]) {
+                gamePackages[val].forEach(opt => {
+                  const o = document.createElement('option');
+                  o.value = opt;
+                  o.textContent = opt;
+                  packageSelect.appendChild(o);
+                });
+                packageSelect.disabled = false;
+              } else {
+                packageSelect.disabled = true;
+              }
+              // Update Game ID label and max length
+              if (gameIdLabel && gameIdInput) {
+                const labelSpan = document.getElementById('gameIdLabelText');
+                if (labelSpan) labelSpan.textContent = gameIdLabels[val] || 'Game ID';
+                gameIdInput.placeholder = 'e.g. 123456789';
+                gameIdInput.maxLength = gameIdMaxLengths[val] || 10;
+              }
+              // Show/hide Zone ID only for Mobile Legends
+              if (zoneIdWrapper && zoneIdInput) {
+                if (val === 'Mobile Legends') {
+                  zoneIdWrapper.style.display = '';
+                  zoneIdInput.maxLength = 5;
+                  // Make gap between Game ID and Zone ID wider
+                  const gameIdLabel = document.getElementById('gameIdLabel');
+                  if (gameIdLabel) gameIdLabel.style.marginBottom = '28px';
+                } else {
+                  zoneIdWrapper.style.display = 'none';
+                  zoneIdInput.value = '';
+                  // Reset Game ID label margin
+                  const gameIdLabel = document.getElementById('gameIdLabel');
+                  if (gameIdLabel) gameIdLabel.style.marginBottom = '16px';
+                }
+              }
+            });
+            packageSelect.disabled = true;
+            // Initial state
+            if (zoneIdWrapper && zoneIdInput) {
+              zoneIdWrapper.style.display = 'none';
+              zoneIdInput.value = '';
+            }
+            if (gameIdLabel && gameIdInput) {
+              gameIdLabel.style.display = 'block';
+              gameIdInput.style.display = 'block';
+            }
+          }
+        }
+      }
+      document.querySelectorAll('.btn.btn-primary').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const href = btn.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            const type = href.replace('#','').toLowerCase();
+            setServiceInfo(type);
+            // Show info section if hidden
+            const infoSection = document.getElementById('service-info-section');
+            if (infoSection) {
+              infoSection.style.display = 'flex';
+              const rect = infoSection.getBoundingClientRect();
+              const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+              const targetY = rect.top + scrollTop - (window.innerHeight / 2) + (rect.height / 2);
+              window.scrollTo({
+                top: targetY,
+                behavior: 'smooth'
+              });
+            }
+            e.preventDefault();
+          }
+        });
+      });
+    });
+  </script>
+  <script>
+    // Center services section when clicking Start Your Order in hero
+    document.addEventListener('DOMContentLoaded', function() {
+      const startOrderBtn = document.querySelector('.hero-section .btn.btn-primary[href="#services"]');
+      const servicesSection = document.getElementById('services');
+      if (startOrderBtn && servicesSection) {
+        startOrderBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const rect = servicesSection.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const targetY = rect.top + scrollTop - (window.innerHeight / 2) + (rect.height / 2);
+          window.scrollTo({
+            top: targetY,
+            behavior: 'smooth'
+          });
+        });
+      }
+    });
+  </script>
+  <script>
+    // Cart drawer logic
+    function renderCartDrawer() {
+      const cartDrawerItemsDiv = document.getElementById('cartDrawerItems');
+      const cartDrawerToPaymentBtn = document.getElementById('cartDrawerToPaymentBtn');
+      let cart = [];
+      try { cart = JSON.parse(localStorage.getItem('cart')) || []; } catch {}
+      if (!cartDrawerItemsDiv || !cartDrawerToPaymentBtn) return;
+      if (!cart.length) {
+        cartDrawerItemsDiv.innerHTML = '<p style="color:var(--text-muted); text-align:center;">Your cart is empty.</p>';
+        cartDrawerToPaymentBtn.disabled = true;
+        cartDrawerToPaymentBtn.style.opacity = 0.6;
+      } else {
+        // Field label mapping for user-friendly display (match Your Details card)
+        const fieldLabels = {
+          gameid: 'Game ID',
+          zoneid: 'Zone ID',
+          phone: 'Phone Number',
+          telco: 'Telco Type',
+          package: 'Package',
+          account: 'Account Number',
+          provider: 'Provider',
+          utility: 'Utility',
+          amount: 'Amount',
+          game: 'Game Type',
+        };
+        // Field order for each service type (match Your Details card)
+        const fieldOrder = {
+          'Prepaid Top-up': ['telco', 'phone', 'package'],
+          'Postpaid Top-up': ['telco', 'phone', 'amount'],
+          'Utility Bill': ['utility', 'provider', 'account', 'amount'],
+          'Game Credits': ['game', 'package', 'gameid', 'zoneid'],
+        };
+        cartDrawerItemsDiv.innerHTML = cart.map((item, idx) => {
+          const service = item.service || 'Service';
+          const order = fieldOrder[service] || Object.keys(item).filter(k => k !== 'service');
+          // Utility label logic
+          function getLabel(k, v) {
+            if (k === 'utility') return 'Utility';
+            return fieldLabels[k] || (k.charAt(0).toUpperCase() + k.slice(1));
+          }
+          function getValue(k, v) {
+            if (k === 'utility') {
+              if (v === 'electricity') return 'Electricity';
+              if (v === 'water') return 'Water';
+              if (v === 'wifi') return 'WiFi';
+              if (v === 'entertainment') return 'Entertainment';
+              return v.charAt(0).toUpperCase() + v.slice(1);
+            }
+            return v;
+          }
+          // Render fields in order
+          const detailsHtml = order
+            .filter(k => item[k] !== undefined && item[k] !== '')
+            .map(k => `<div style='margin-bottom:10px;'><span style='color:var(--primary-coffee);font-weight:600;'>${getLabel(k, item[k])}:</span> ${getValue(k, item[k])}</div>`)
+            .join('');
+          return `
+            <div style="background:var(--bg-warm); border-radius:12px; box-shadow:0 2px 8px #c19a6b11; margin-bottom:16px; padding:16px 14px 14px 14px; position:relative; display:flex; flex-direction:column; gap:6px;">
+              <button class='remove-cart-item-btn' data-idx='${idx}' title='Remove' style="position:absolute; top:10px; right:10px; background:none; border:none; color:#ef4444; font-size:1.1rem; cursor:pointer; padding:4px;"><i class='fas fa-trash'></i></button>
+              <div style="font-weight:700; color:var(--primary-coffee); font-size:1.08rem; margin-bottom:2px;">${service}</div>
+              <div style="font-size:0.97rem; color:var(--text-dark); line-height:1.5;">${detailsHtml}</div>
+            </div>
+          `;
+        }).join('');
+        cartDrawerToPaymentBtn.disabled = false;
+        cartDrawerToPaymentBtn.style.opacity = 1;
+        cartDrawerToPaymentBtn.style.textAlign = 'center';
+        // Add remove logic
+        cartDrawerItemsDiv.querySelectorAll('.remove-cart-item-btn').forEach(btn => {
+          btn.onclick = function() {
+            const idx = parseInt(btn.getAttribute('data-idx'));
+            let cart = [];
+            try { cart = JSON.parse(localStorage.getItem('cart')) || []; } catch {}
+            cart.splice(idx, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            // Update cart count
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) cartCount.textContent = cart.length;
+            window.renderCartDrawer();
+          };
+        });
+      }
+    }
+    window.renderCartDrawer = renderCartDrawer;
+    document.addEventListener('DOMContentLoaded', function() {
+      const cartBtn = document.getElementById('cartBtn');
+      const cartDrawer = document.getElementById('cartDrawer');
+      const cartDrawerBg = document.getElementById('cartDrawerBg');
+      const closeCartDrawer = document.getElementById('closeCartDrawer');
+      const cartDrawerToPaymentBtn = document.getElementById('cartDrawerToPaymentBtn');
+      if (cartBtn && cartDrawer && cartDrawerBg) {
+        cartBtn.onclick = function() {
+          window.renderCartDrawer();
+          cartDrawerBg.style.display = 'block';
+          cartDrawer.style.display = 'flex';
+          setTimeout(() => {
+            cartDrawer.style.transform = 'translateX(0)';
+          }, 10);
+        };
+      }
+      if (closeCartDrawer && cartDrawer && cartDrawerBg) {
+        closeCartDrawer.onclick = function() {
+          cartDrawer.style.transform = 'translateX(100%)';
+          setTimeout(() => {
+            cartDrawer.style.display = 'none';
+            cartDrawerBg.style.display = 'none';
+          }, 400);
+        };
+      }
+      if (cartDrawerToPaymentBtn) {
+        cartDrawerToPaymentBtn.onclick = function() {
+          window.location.href = 'payment.html';
+        };
+      }
+      // Close drawer on background click
+      if (cartDrawerBg) {
+        cartDrawerBg.addEventListener('click', function(e) {
+          cartDrawer.style.transform = 'translateX(100%)';
+          setTimeout(() => {
+            cartDrawer.style.display = 'none';
+            cartDrawerBg.style.display = 'none';
+          }, 400);
+        });
+      }
+    });
+  </script>
+  <script>
+    // On load, update cart count from localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+      const cartCount = document.getElementById('cartCount');
+      if (cartCount) {
+        let cart = [];
+        try {
+          cart = JSON.parse(localStorage.getItem('cart')) || [];
+        } catch {}
+        cartCount.textContent = cart.length;
+      }
+    });
+  </script>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 2fr; gap: 32px; align-items: start;">
+        <div class="footer-section" style="grid-column: 1;">
+          <div class="footer-logo">
+            <img src="images/Logo.png" alt="KIFMAN x NISH Logo" />
+          </div>
+          <p class="footer-description">
+            Making digital services simple, personal, and reliable. <br>
+            We're here to help you stay connected and organized.
+          </p>
+        </div>
+        <div class="footer-section" style="grid-column: 2;">
+          <h3 class="footer-heading">Services</h3>
+          <ul class="footer-links">
+            <li><a href="services.html">Mobile Top-ups</a></li>
+            <li><a href="services.html">Bill Payments</a></li>
+            <li><a href="services.html">Game Credits</a></li>
+            <li><a href="services.html">Digital Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-section" style="grid-column: 3;">
+          <h3 class="footer-heading">Company</h3>
+          <ul class="footer-links">
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#why">Why Choose Us</a></li>
+            <li><a href="track.html">Track Order</a></li>
+          </ul>
+        </div>
+        <div class="footer-section" style="grid-column: 4;">
+          <h3 class="footer-heading">Support</h3>
+          <ul class="footer-links">
+            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section" style="grid-column: 5;">
+          <h3 class="footer-heading">Contact Info</h3>
+          <div class="footer-contact">
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+60 19-476 1092 (Kifman)</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>muhammadakifaiman@gmail.com</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+60 19-448 7256 (Nish)</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>danishmirza0051@gmail.com</span>
+            </div>
           </div>
         </div>
-        <div class="mb-4">
-          <label class="block font-semibold mb-2">Upload Payment Receipt <span class="text-red-500">*</span></label>
-          <input id="receiptUpload" type="hidden" role="uploadcare-uploader" data-crop="free" data-clearable="true" aria-label="Upload payment receipt" />
-          <div id="receiptPreview" class="mt-2"></div>
-        </div>
-        <button id="submitWhatsAppBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 flex items-center justify-center gap-2 disabled:opacity-50" disabled>
-          <i class="fab fa-whatsapp mr-2"></i> Submit via WhatsApp
-        </button>
       </div>
+      <style>
+        @media (max-width: 900px) {
+          .footer-content {
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+          }
+          .footer-section {
+            grid-column: auto !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .footer-content {
+            grid-template-columns: 1fr;
+            gap: 18px;
+          }
+          .footer-section {
+            grid-column: auto !important;
+            text-align: left;
+          }
+        }
+      </style>
     </div>
-    <!-- Order Tracking Modal -->
-    <div id="trackOrderModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative">
-        <button id="closeTrackOrderModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
-        <h2 class="text-xl font-bold mb-4 text-center">Track Your Order</h2>
-        <form id="trackOrderForm" class="space-y-4">
-          <div>
-            <label class="block text-gray-700 font-medium mb-1" for="trackRef">Reference Number</label>
-            <input id="trackRef" type="text" class="w-full border rounded-lg px-3 py-2" placeholder="e.g. KIF-20240601-1234" required />
-          </div>
-          <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 rounded-lg">Check Status</button>
-        </form>
-        <div id="trackOrderResult" class="mt-6"></div>
-      </div>
-    </div>
-    <!-- Hamburger Menu Drawer (Left) -->
-    <div id="adminMenuDrawer" class="fixed inset-0 z-50 flex pointer-events-none">
-      <aside class="w-64 max-w-full h-full bg-white shadow-2xl p-0 flex flex-col transform -translate-x-full transition-transform duration-300 pointer-events-auto" id="adminMenuDrawerContent">
-        <div class="flex items-center justify-between px-6 py-4 border-b">
-          <h2 class="text-xl font-bold">Menu</h2>
-          <button id="closeAdminMenuDrawer" class="text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
-        </div>
-        <nav class="flex-1 flex flex-col gap-2 p-6">
-          <button id="openAdminPanelBtn" class="main-btn main-btn-outline-yellow w-full text-left">Admin Panel</button>
-        </nav>
-      </aside>
-      <div class="flex-1 bg-black bg-opacity-40 transition-opacity duration-300 opacity-0 pointer-events-none" id="adminMenuDrawerBackdrop"></div>
-    </div>
-    <!-- Admin Panel Full Page -->
-    <div id="adminPanelPage" class="fixed inset-0 z-50 bg-white flex-col hidden">
-      <div class="flex items-center justify-between px-6 py-4 border-b shadow">
-        <h2 class="text-xl font-bold">Admin Panel - Orders</h2>
-        <button id="backToShopBtn" class="main-btn main-btn-outline-yellow">Back to Shop</button>
-      </div>
-      <div id="adminOrdersList" class="overflow-x-auto p-6 flex-1"></div>
-    </div>
-    <!-- Admin Panel Controls -->
-    <template id="adminPanelControls">
-      <div class="flex flex-col md:flex-row md:items-center gap-2 mb-4">
-        <input id="adminSearchInput" type="text" placeholder="Search by Reference" class="border rounded px-3 py-2 w-full md:w-64" />
-        <select id="adminStatusFilter" class="border rounded px-3 py-2 w-full md:w-40">
-          <option value="">All Statuses</option>
-          <option value="Pending">Pending</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-          <option value="Archived">Archived</option>
-        </select>
-        <select id="adminSort" class="border rounded px-3 py-2 w-full md:w-40">
-          <option value="date_desc">Newest First</option>
-          <option value="date_asc">Oldest First</option>
-          <option value="status">Status</option>
-          <option value="total_desc">Total High-Low</option>
-          <option value="total_asc">Total Low-High</option>
-        </select>
-      </div>
-    </template>
-    <!-- Order Details Modal -->
-    <div id="orderDetailsModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg relative">
-        <button id="closeOrderDetailsModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
-        <h2 class="text-2xl font-bold mb-4 text-center">Order Details</h2>
-        <div id="orderDetailsContent"></div>
-      </div>
-    </div>
-    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
-    <script src="js/script.js"></script>
-  </body>
-</html> 
+  </footer>
+</body>
+</html>

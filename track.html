@@ -3,116 +3,353 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Track Order - Kifman Shop</title>
+    <title>Track Order - KIFMAN x NISH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
   </head>
-  <body class="bg-black min-h-screen flex flex-col text-white">
-    <header class="w-full flex items-center justify-between px-10 py-6 glass-header sticky top-0 z-40">
-      <div class="flex items-center gap-4">
-        <img src="https://ucarecdn.com/6e2e2e2e-1234-5678-9101-abcdefabcdef/logo.png" alt="Kifman Shop Logo" class="h-10 w-auto" onerror="this.style.display='none'" />
-        <span class="text-3xl font-extrabold tracking-tight uppercase">KIFMAN SHOP</span>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+      <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Minimalist Breadcrumb Navigation -->
+    <div class="breadcrumb" id="breadcrumb">
+      <div class="breadcrumb-logo">
+        <a href="index.html">
+          <img src="images/Logo.png" alt="KIFMAN x NISH Logo" />
+        </a>
       </div>
-      <nav class="flex items-center gap-6">
-        <a href="index.html" class="main-btn main-btn-outline-yellow">Home</a>
-        <a href="services.html" class="main-btn main-btn-outline-yellow">Services</a>
-        <a href="cart.html" class="main-btn main-btn-outline-yellow">Cart</a>
-        <a href="track.html" class="main-btn main-btn-outline-yellow">Track Order</a>
-        <a href="admin.html" class="main-btn main-btn-outline-yellow">Admin</a>
-        <a href="about.html" class="main-btn main-btn-outline-yellow">About</a>
-      </nav>
-    </header>
+      <div class="breadcrumb-links">
+        <a href="index.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </div>
+    </div>
+
+    <!-- Cart Navigation Bar -->
+    <nav class="cart-nav" id="cartNav">
+      <div class="cart-nav-container">
+        <button class="cart-btn" id="cartBtn" title="Shopping Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Navigation -->
+    <nav class="floating-nav" id="mainNav">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="index.html">
+            <img src="images/Logo.png" alt="KIFMAN x NISH Logo" />
+          </a>
+        </div>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">About</a>
+          <a href="services.html" class="nav-link">Services</a>
+          <a href="index.html#faq" class="nav-link">FAQ</a>
+          <a href="index.html#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-background">
+        <div class="hero-pattern"></div>
+      </div>
+      
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-search"></i>
+          <span>Track your order status</span>
+        </div>
+        
+        <h1 class="hero-headline">
+          Track Your Order
+          <span class="hero-brand">KIFMAN x NISH</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+          Enter your reference number to check the status of your order. 
+          We'll show you exactly where your order is and when you can expect it.
+        </p>
+        
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="trackOrderBtn">
+            <i class="fas fa-search"></i>
+            <span>Track Order</span>
+          </button>
+          <a href="services.html" class="btn btn-secondary">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Order Again</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Track Order Section -->
+    <section class="about-section" id="trackSection">
+      <div class="container">
+        <div class="section-header fade-in">
+          <h2 class="section-heading">Order Tracking</h2>
+          <p class="section-subtitle">
+            Enter your reference number to get real-time updates on your order status.
+          </p>
+        </div>
+        
+        <div class="contact-content">
+          <div class="contact-info slide-in-left">
+            <div class="contact-methods">
+              <div class="contact-method scale-in">
+                <div class="contact-icon">
+                  <i class="fas fa-search"></i>
+                </div>
+                <div class="contact-details">
+                  <div class="contact-label">Quick Tracking</div>
+                  <div class="contact-sub">Find your order instantly</div>
+                </div>
+              </div>
+              
+              <div class="contact-method scale-in">
+                <div class="contact-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="contact-details">
+                  <div class="contact-label">Real-time Updates</div>
+                  <div class="contact-sub">Live status information</div>
+                </div>
+              </div>
+              
+              <div class="contact-method scale-in">
+                <div class="contact-icon">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="contact-details">
+                  <div class="contact-label">Secure & Private</div>
+                  <div class="contact-sub">Your data is protected</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-form slide-in-right">
+            <form class="contact-form-inner" id="trackOrderForm">
+              <div class="form-group">
+                <input type="text" id="trackRef" required placeholder=" " />
+                <label for="trackRef">Reference Number</label>
+              </div>
+              <button type="submit" class="btn btn-primary w-full">
+                <i class="fas fa-search"></i>
+                <span>Track Order</span>
+              </button>
+            </form>
+            <div id="trackOrderResult" class="mt-6"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Order Tracking Modal -->
-    <div id="trackOrderModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+    <div id="trackOrderModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
       <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative">
-        <button id="closeTrackOrderModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"><i class="fas fa-times"></i></button>
+        <button id="closeTrackOrderModal" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl">
+          <i class="fas fa-times"></i>
+        </button>
         <h2 class="text-xl font-bold mb-4 text-center">Track Your Order</h2>
-        <form id="trackOrderForm" class="space-y-4">
+        <form id="trackOrderFormModal" class="space-y-4">
           <div>
-            <label class="block text-gray-700 font-medium mb-1" for="trackRef">Reference Number</label>
-            <input id="trackRef" type="text" class="w-full border rounded-lg px-3 py-2" placeholder="e.g. KIF-20240601-1234" required />
+            <label class="block text-gray-700 font-medium mb-1" for="trackRefModal">Reference Number</label>
+            <input id="trackRefModal" type="text" class="w-full border rounded-lg px-3 py-2" placeholder="e.g. KIF-20240601-1234" required />
           </div>
           <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 rounded-lg">Check Status</button>
         </form>
-        <div id="trackOrderResult" class="mt-6"></div>
+        <div id="trackOrderResultModal" class="mt-6"></div>
       </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <img src="images/Logo.png" alt="KIFMAN x NISH Logo" />
+            </div>
+            <p class="footer-description">
+              Simple digital services made personal. We're here to help with mobile top-ups, 
+              bill payments, and game credits.
+            </p>
+            <!-- Social icons removed -->
+          </div>
+          
+          <div class="footer-links-group">
+            <h3 class="footer-heading">Services</h3>
+            <ul class="footer-links">
+              <li><a href="services.html">Mobile Top-ups</a></li>
+              <li><a href="services.html">Bill Payments</a></li>
+              <li><a href="services.html">Game Credits</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-links-group">
+            <h3 class="footer-heading">Support</h3>
+            <ul class="footer-links">
+              <li><a href="index.html#faq">FAQ</a></li>
+              <li><a href="index.html#contact">Contact Us</a></li>
+              <li><a href="track.html">Track Order</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-contact">
+            <h3 class="footer-heading">Get In Touch</h3>
+                                        <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+60 19-476 1092 (Kifman)</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>muhammadakifaiman@gmail.com</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+60 19-448 7256 (Nish)</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>danishmirza05@gmail.com</span>
+              </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <div class="footer-bottom-content">
+            <div class="footer-copyright">
+              © 2025 KIFMAN x NISH. All rights reserved.
+            </div>
+            <div class="footer-legal">
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <script src="js/script.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const trackOrderModal = document.getElementById('trackOrderModal');
         const closeTrackOrderModal = document.getElementById('closeTrackOrderModal');
         const trackOrderForm = document.getElementById('trackOrderForm');
+        const trackOrderFormModal = document.getElementById('trackOrderFormModal');
         const trackRefInput = document.getElementById('trackRef');
+        const trackRefInputModal = document.getElementById('trackRefModal');
         const trackOrderResult = document.getElementById('trackOrderResult');
+        const trackOrderResultModal = document.getElementById('trackOrderResultModal');
+        const trackOrderBtn = document.getElementById('trackOrderBtn');
 
         function showModal() {
-          trackOrderModal.style.display = 'flex';
+          trackOrderModal.classList.remove('hidden');
         }
-
+        
         function hideModal() {
-          trackOrderModal.style.display = 'none';
+          trackOrderModal.classList.add('hidden');
         }
-
+        
         function clearResult() {
           trackOrderResult.innerHTML = '';
+          trackOrderResultModal.innerHTML = '';
         }
-
-        function displayError(message) {
-          trackOrderResult.innerHTML = `<div class="text-red-500 text-center">${message}</div>`;
+        
+        function displayError(message, container) {
+          container.innerHTML = `<div class="text-red-500 text-center p-4 bg-red-50 rounded-lg">${message}</div>`;
         }
-
-        function displaySuccess(message) {
-          trackOrderResult.innerHTML = `<div class="text-green-500 text-center">${message}</div>`;
+        
+        function displaySuccess(message, container) {
+          container.innerHTML = `<div class="text-green-500 text-center p-4 bg-green-50 rounded-lg">${message}</div>`;
         }
-
-        function displayOrderDetails(order) {
-          trackOrderResult.innerHTML = `
-            <h3 class="text-xl font-bold mb-2">Order Details</h3>
-            <p><strong>Reference Number:</strong> ${order.reference_number}</p>
-            <p><strong>Status:</strong> ${order.status}</p>
-            <p><strong>Date:</strong> ${order.date}</p>
-            <p><strong>Total:</strong> $${order.total}</p>
-            <p><strong>Items:</strong></p>
-            <ul>
-              ${order.items.map(item => `<li>${item.name} - $${item.price} x ${item.quantity}</li>`).join('')}
-            </ul>
-            <p><strong>Shipping Address:</strong></p>
-            <p>${order.shipping_address}</p>
-            <p><strong>Payment Method:</strong> ${order.payment_method}</p>
+        
+        function displayOrderDetails(order, container) {
+          container.innerHTML = `
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h3 class="text-xl font-bold mb-2">Order Details</h3>
+              <p><strong>Reference Number:</strong> ${order.reference_number}</p>
+              <p><strong>Status:</strong> <span class="font-bold ${order.status === 'Completed' ? 'text-green-600' : order.status === 'In Progress' ? 'text-yellow-600' : 'text-red-600'}">${order.status}</span></p>
+              <p><strong>Date:</strong> ${order.date}</p>
+              <p><strong>Total:</strong> $${order.total}</p>
+              <p><strong>Items:</strong></p>
+              <ul class="list-disc list-inside ml-4">
+                ${order.items.map(item => `<li>${item.name} - $${item.price} x ${item.quantity}</li>`).join('')}
+              </ul>
+              <p><strong>Shipping Address:</strong></p>
+              <p class="ml-4">${order.shipping_address}</p>
+              <p><strong>Payment Method:</strong> ${order.payment_method}</p>
+            </div>
           `;
         }
 
-        closeTrackOrderModal.addEventListener('click', hideModal);
-
-        trackOrderForm.addEventListener('submit', async function(e) {
-          e.preventDefault();
-          const referenceNumber = trackRefInput.value.trim();
-
-          if (!referenceNumber) {
-            displayError('Please enter a reference number.');
-            return;
-          }
-
-          try {
-            const response = await fetch(`/api/orders/track/${referenceNumber}`);
-            if (response.ok) {
-              const order = await response.json();
-              displayOrderDetails(order);
-            } else {
-              const errorData = await response.json();
-              displayError(errorData.message || 'Failed to fetch order details.');
+        if (closeTrackOrderModal) closeTrackOrderModal.addEventListener('click', hideModal);
+        if (trackOrderBtn) trackOrderBtn.addEventListener('click', showModal);
+        
+        // Handle form submission from main page
+        if (trackOrderForm) {
+          trackOrderForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const referenceNumber = trackRefInput.value.trim();
+            if (!referenceNumber) {
+              displayError('Please enter a reference number.', trackOrderResult);
+              return;
             }
-          } catch (error) {
-            displayError('An error occurred while fetching order details.');
-            console.error(error);
-          }
-        });
+            try {
+              const response = await fetch(`/api/orders/track/${referenceNumber}`);
+              if (response.ok) {
+                const order = await response.json();
+                displayOrderDetails(order, trackOrderResult);
+              } else {
+                const errorData = await response.json();
+                displayError(errorData.message || 'Failed to fetch order details.', trackOrderResult);
+              }
+            } catch (error) {
+              displayError('An error occurred while fetching order details.', trackOrderResult);
+              console.error(error);
+            }
+          });
+        }
 
-        // Show modal when page loads
-        showModal();
+        // Handle form submission from modal
+        if (trackOrderFormModal) {
+          trackOrderFormModal.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const referenceNumber = trackRefInputModal.value.trim();
+            if (!referenceNumber) {
+              displayError('Please enter a reference number.', trackOrderResultModal);
+              return;
+            }
+            try {
+              const response = await fetch(`/api/orders/track/${referenceNumber}`);
+              if (response.ok) {
+                const order = await response.json();
+                displayOrderDetails(order, trackOrderResultModal);
+              } else {
+                const errorData = await response.json();
+                displayError(errorData.message || 'Failed to fetch order details.', trackOrderResultModal);
+              }
+            } catch (error) {
+              displayError('An error occurred while fetching order details.', trackOrderResultModal);
+              console.error(error);
+            }
+          });
+        }
       });
     </script>
   </body>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment - KIFMAN x NISH</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body style="background: var(--bg-light); color: var(--text-dark); font-family: 'Inter', sans-serif;">
+  <nav class="floating-nav" style="position:static; box-shadow:none; background:transparent;">
+    <div class="nav-container" style="background:transparent; box-shadow:none;">
+      <div class="nav-logo">
+        <a href="index.html"><img src="images/Logo.png" alt="KIFMAN x NISH Logo" style="height:36px;" /></a>
+      </div>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="cart.html" class="nav-link">Cart</a>
+      </div>
+    </div>
+  </nav>
+  <main style="max-width:600px; margin:48px auto; background:var(--white); border-radius:18px; box-shadow:0 4px 24px var(--shadow-light); padding:40px 32px;">
+    <h1 style="font-size:2rem; color:var(--primary-coffee); margin-bottom:18px; text-align:center;">Payment</h1>
+    <p style="text-align:center; color:var(--text-muted); margin-bottom:32px; font-size:1.1rem;">Please review your order and proceed with payment.</p>
+    <section id="cart-summary" style="margin-bottom:32px;">
+      <h2 style="font-size:1.15rem; color:var(--primary-coffee); margin-bottom:10px;">Order Summary</h2>
+      <div style="background:var(--bg-warm); border-radius:12px; padding:18px 16px; min-height:60px; color:var(--text-dark);">
+        <!-- Cart items will be dynamically loaded here -->
+        <p>Your cart items will appear here.</p>
+      </div>
+    </section>
+    <section id="payment-instructions" style="margin-bottom:32px;">
+      <h2 style="font-size:1.15rem; color:var(--primary-coffee); margin-bottom:10px;">Payment Instructions</h2>
+      <div style="background:var(--accent-nude); border-radius:12px; padding:18px 16px; color:var(--text-dark);">
+        <p>To complete your order, please transfer the total amount to our bank account or scan the QR code below. After payment, upload your receipt or contact us for confirmation.</p>
+        <ul style="margin:12px 0 0 18px;">
+          <li><b>Bank Name:</b> Maybank</li>
+          <li><b>Account Number:</b> 1234 5678 9012</li>
+          <li><b>Account Holder:</b> Kifman Resources</li>
+        </ul>
+        <div style="margin:18px 0 0 0; text-align:center;">
+          <img src="https://ucarecdn.com/c484f273-e8d3-4810-95ec-60b03d3f6108/QRKifman.png" alt="QR Payment" style="width:160px; border-radius:10px; box-shadow:0 2px 8px #c19a6b33;" />
+        </div>
+      </div>
+    </section>
+    <button id="completePaymentBtn" class="btn btn-primary" style="width:100%; font-size:1.1rem; padding:14px 0;">Complete Payment</button>
+  </main>
+  <script>
+    // Placeholder: You can add JS to load cart items and handle payment logic here
+    document.getElementById('completePaymentBtn').onclick = function() {
+      alert('Thank you! Your payment will be processed.');
+    };
+  </script>
+</body>
+</html> 
